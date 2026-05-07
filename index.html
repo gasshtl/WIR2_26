@@ -2,685 +2,651 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Wirtschaftsrecht – Karteikarten</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:        #0d1117;
-    --surface:   #161b24;
-    --surface2:  #1e2636;
-    --border:    #1e4a6e;
-    --teal:      #0ea5c9;
-    --teal-dim:  #0b7da0;
-    --teal-glow: rgba(14,165,201,0.18);
-    --cyan:      #67e8f9;
-    --amber:     #fbbf24;
-    --amber-dim: #92400e;
-    --amber-glow:rgba(251,191,36,0.15);
-    --green:     #34d399;
-    --green-dim: #065f46;
-    --red:       #f87171;
-    --red-dim:   #7f1d1d;
-    --text:      #e2e8f0;
-    --text-muted:#8899aa;
-    --text-dim:  #4a5568;
-    --radius:    16px;
-    --card-h:    340px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 0 60px;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(14,165,201,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(14,165,201,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  /* ══ HOME ══ */
-  #homeScreen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    padding: 52px 20px 0;
-    position: relative;
-    z-index: 1;
-  }
-  .home-eyebrow {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 10px;
-  }
-  .home-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 30px;
-    font-weight: 800;
-    text-align: center;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .home-title span { color: var(--teal); }
-  .home-sub { color: var(--text-muted); font-size: 14px; text-align: center; margin-bottom: 40px; }
+:root {
+  --bg: #0d1117;
+  --surf: #161b24;
+  --surf2: #1e2636;
+  --border: #1e4a6e;
+  --teal: #0ea5c9;
+  --cyan: #67e8f9;
+  --teal-glow: rgba(14,165,201,0.2);
+  --amber: #fbbf24;
+  --amber-glow: rgba(251,191,36,0.15);
+  --green: #34d399;
+  --green-bg: #052e16;
+  --red: #f87171;
+  --red-bg: #450a0a;
+  --text: #e2e8f0;
+  --muted: #8899aa;
+  --dim: #4a5568;
+  --r: 14px;
+}
 
-  .set-cards { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60px;
+}
 
-  .set-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 24px;
-    cursor: pointer;
-    transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
-    position: relative;
-    overflow: hidden;
-    border: 1.5px solid transparent;
-  }
-  .set-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .s1 { border-color: var(--border); }
-  .s1::before { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
-  .s1:hover { transform: translateY(-3px); border-color: var(--teal); box-shadow: 0 10px 36px rgba(14,165,201,0.2); }
+/* ─── SCREENS ─── */
+.screen { width: 100%; max-width: 580px; padding: 0 16px; }
+.hidden { display: none !important; }
 
-  .s2 { border-color: #3a2e1a; }
-  .s2::before { background: linear-gradient(90deg, var(--amber), #f59e0b); }
-  .s2:hover { transform: translateY(-3px); border-color: var(--amber); box-shadow: 0 10px 36px rgba(251,191,36,0.15); }
+/* ─── HOME ─── */
+#home { padding-top: 48px; }
 
-  .set-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-  .set-badge {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 4px 10px; border-radius: 20px;
-  }
-  .s1 .set-badge { background: rgba(14,165,201,0.12); color: var(--teal); }
-  .s2 .set-badge { background: rgba(251,191,36,0.12); color: var(--amber); }
+.eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--teal); text-align: center; margin-bottom: 8px;
+}
 
-  .set-count { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800; line-height: 1; text-align: right; }
-  .s1 .set-count { color: var(--teal); }
-  .s2 .set-count { color: var(--amber); }
-  .set-count small { font-size: 13px; font-weight: 400; color: var(--text-muted); display: block; }
+.home-h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 800;
+  text-align: center; line-height: 1.2; margin-bottom: 6px;
+}
+.home-h1 em { color: var(--teal); font-style: normal; }
 
-  .set-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-  .set-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.home-sub { color: var(--muted); font-size: 14px; text-align: center; margin-bottom: 36px; }
 
-  .set-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+/* Set cards */
+.set-btn {
+  display: block;
+  width: 100%;
+  background: var(--surf);
+  border: 2px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  /* reset button styles */
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-  .set-warn {
-    display: flex; align-items: center; gap: 7px;
-    margin-top: 12px; padding: 8px 12px;
-    background: rgba(251,191,36,0.07);
-    border: 1px solid rgba(251,191,36,0.2);
-    border-radius: 8px; font-size: 12px; color: var(--amber);
-  }
-  .set-arrow { position: absolute; right: 22px; bottom: 22px; font-size: 20px; opacity: 0.25; transition: all 0.2s; pointer-events: none; }
-  .set-card:hover .set-arrow { opacity: 1; transform: translateX(4px); }
-  .set-card * { pointer-events: none; }
-  .set-card { pointer-events: all; }
+.set-btn:active { transform: scale(0.98); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  #homeScreen > * { animation: fadeUp 0.38s ease both; }
-  #homeScreen > *:nth-child(1) { animation-delay: 0.05s; }
-  #homeScreen > *:nth-child(2) { animation-delay: 0.1s; }
-  #homeScreen > *:nth-child(3) { animation-delay: 0.15s; }
-  #homeScreen > *:nth-child(4) { animation-delay: 0.2s; }
+.set-btn.s1 { border-top: 3px solid var(--teal); }
+.set-btn.s1:hover { border-color: var(--teal); box-shadow: 0 8px 28px var(--teal-glow); }
 
-  /* ══ QUIZ ══ */
-  #quizScreen { display: none; flex-direction: column; align-items: center; width: 100%; }
+.set-btn.s2 { border-top: 3px solid var(--amber); }
+.set-btn.s2:hover { border-color: var(--amber); box-shadow: 0 8px 28px var(--amber-glow); }
 
-  .qheader {
-    width: 100%; max-width: 600px;
-    padding: 28px 20px 0;
-    display: flex; align-items: center; gap: 12px;
-    position: relative; z-index: 1;
-  }
-  .back-btn {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 10px; color: var(--text-muted);
-    padding: 8px 14px; cursor: pointer; font-size: 18px;
-    transition: all 0.2s; flex-shrink: 0;
-  }
-  .back-btn:hover { border-color: var(--teal); color: var(--teal); }
-  .qheader-info { flex: 1; }
-  .qheader-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2px; }
-  .c-teal { color: var(--teal); }
-  .c-amber { color: var(--amber); }
-  .qheader-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: var(--text); }
+.set-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
 
-  .stats-wrap { width: 100%; max-width: 600px; padding: 0 20px; margin-top: 16px; position: relative; z-index: 1; }
-  .stats {
-    display: flex; gap: 10px; padding: 12px 16px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; align-items: center;
-  }
-  .stat { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; }
-  .snum { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal); }
-  .snum.g { color: var(--green); }
-  .snum.r { color: var(--red); }
-  .slbl { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
-  .sdiv { width: 1px; height: 30px; background: var(--border); }
+.set-badge {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+}
+.s1 .set-badge { background: rgba(14,165,201,0.13); color: var(--teal); }
+.s2 .set-badge { background: rgba(251,191,36,0.13); color: var(--amber); }
 
-  .prog-wrap { width: 100%; max-width: 600px; padding: 0 20px; margin-top: 14px; position: relative; z-index: 1; }
-  .prog-bar { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-  .prog-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
-  .pf-teal { background: linear-gradient(90deg, var(--teal), var(--cyan)); box-shadow: 0 0 8px var(--teal-glow); }
-  .pf-amber { background: linear-gradient(90deg, var(--amber), #f59e0b); box-shadow: 0 0 8px var(--amber-glow); }
-  .prog-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; color: var(--text-dim); }
+.set-count { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; line-height: 1; }
+.s1 .set-count { color: var(--teal); }
+.s2 .set-count { color: var(--amber); }
+.set-count span { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
 
-  .mode-bar { width: 100%; max-width: 600px; padding: 0 20px; display: flex; gap: 8px; margin-top: 12px; position: relative; z-index: 1; }
-  .mbtn {
-    flex: 1; padding: 8px; border-radius: 8px;
-    border: 1px solid var(--border); background: var(--surface);
-    color: var(--text-muted); font-family: 'DM Sans', sans-serif;
-    font-size: 12px; cursor: pointer; transition: all 0.2s;
-  }
-  .mbtn.on-teal  { background: var(--surface2); border-color: var(--teal);  color: var(--teal);  box-shadow: 0 0 10px var(--teal-glow); }
-  .mbtn.on-amber { background: var(--surface2); border-color: var(--amber); color: var(--amber); box-shadow: 0 0 10px var(--amber-glow); }
+.set-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+.set-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
 
-  /* Card */
-  .card-wrap { width: 100%; max-width: 600px; padding: 20px 20px 0; perspective: 1200px; position: relative; z-index: 1; margin-top: 8px; }
-  .card-scene { width: 100%; height: var(--card-h); position: relative; cursor: pointer; }
-  .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
-  .card-inner.flipped { transform: rotateY(180deg); }
-  .card-face {
-    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    border-radius: var(--radius); display: flex; flex-direction: column;
-    justify-content: center; align-items: center; padding: 30px 26px; text-align: center;
-  }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--surf2); color: var(--muted); border: 1px solid var(--border); }
 
-  /* Front */
-  .cf {
-    background: var(--surface);
-    box-shadow: 0 0 0 1px rgba(14,165,201,0.06), 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-  .cf::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius) var(--radius) 0 0; }
-  .th-teal .cf { border: 1.5px solid var(--border); }
-  .th-teal .cf::before { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
-  .th-amber .cf { border: 1.5px solid #3a2e1a; }
-  .th-amber .cf::before { background: linear-gradient(90deg, var(--amber), #f59e0b); }
+.warn {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding: 7px 10px;
+  background: rgba(251,191,36,0.07);
+  border: 1px solid rgba(251,191,36,0.25);
+  border-radius: 8px; font-size: 12px; color: var(--amber);
+}
 
-  /* Back */
-  .cb { background: var(--surface2); transform: rotateY(180deg); }
-  .cb::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius) var(--radius) 0 0; }
-  .th-teal .cb  { border: 1.5px solid rgba(14,165,201,0.4);  box-shadow: 0 0 0 1px rgba(14,165,201,0.1),  0 8px 40px rgba(14,165,201,0.12),  0 8px 32px rgba(0,0,0,0.5); }
-  .th-teal .cb::before  { background: linear-gradient(90deg, var(--cyan),   var(--teal)); }
-  .th-amber .cb { border: 1.5px solid rgba(251,191,36,0.4);  box-shadow: 0 0 0 1px rgba(251,191,36,0.1),  0 8px 40px rgba(251,191,36,0.10), 0 8px 32px rgba(0,0,0,0.5); }
-  .th-amber .cb::before { background: linear-gradient(90deg, #f59e0b, var(--amber)); }
+.arrow { position: absolute; right: 18px; bottom: 18px; font-size: 18px; opacity: 0.2; }
 
-  .card-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 6px; }
-  .th-teal  .card-lbl { color: var(--teal); }
-  .th-amber .card-lbl { color: var(--amber); }
-  .card-lbl::before, .card-lbl::after { content: ''; display: block; width: 20px; height: 1px; background: var(--border); }
-  .card-txt { font-size: 18px; font-weight: 500; line-height: 1.55; color: var(--text); max-width: 480px; }
-  .cb .card-txt { font-size: 16px; font-weight: 400; color: #c8dff0; }
-  .card-hint { position: absolute; bottom: 16px; font-size: 11px; color: var(--text-dim); }
+/* ─── QUIZ ─── */
+#quiz { padding-top: 24px; }
 
-  /* Buttons */
-  .actions { width: 100%; max-width: 600px; padding: 16px 20px 0; display: flex; gap: 12px; position: relative; z-index: 1; }
-  .btn { flex: 1; padding: 14px; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; }
-  .btn:active { transform: scale(0.97); }
-  .btn-flip  { background: var(--surface); color: var(--teal); border: 1px solid var(--border); flex: 0.6; }
-  .btn-flip:hover { background: var(--surface2); border-color: var(--teal); box-shadow: 0 0 12px var(--teal-glow); }
-  .btn-no  { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(248,113,113,0.25); }
-  .btn-no:hover  { background: rgba(127,29,29,0.8); border-color: rgba(248,113,113,0.5); box-shadow: 0 0 16px rgba(248,113,113,0.15); }
-  .btn-yes { background: var(--green-dim); color: var(--green); border: 1px solid rgba(52,211,153,0.25); }
-  .btn-yes:hover { background: rgba(6,95,70,0.8); border-color: rgba(52,211,153,0.5); box-shadow: 0 0 16px rgba(52,211,153,0.15); }
-  .ans-btns { display: flex; gap: 12px; flex: 1; }
-  .ans-btns .btn { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-  .ans-btns.show .btn { opacity: 1; pointer-events: all; }
+.qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 
-  .kb-hint { width: 100%; max-width: 600px; padding: 10px 20px 0; display: flex; gap: 14px; justify-content: center; position: relative; z-index: 1; }
-  .kb-key { font-size: 10px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
-  kbd { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 10px; color: var(--text-muted); }
+.back {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--muted);
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 18px; flex-shrink: 0;
+  transition: all 0.2s;
+  /* reset */
+  font-family: inherit; appearance: none; -webkit-appearance: none;
+}
+.back:hover { border-color: var(--teal); color: var(--teal); }
 
-  /* Done */
-  .done { display: none; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px; gap: 14px; position: relative; z-index: 1; width: 100%; max-width: 600px; margin-top: 20px; }
-  .done.show { display: flex; }
-  .done-icon { font-size: 52px; }
-  .done h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; }
-  .done p { color: var(--text-muted); font-size: 15px; line-height: 1.6; max-width: 340px; }
-  .score-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 28px; display: flex; gap: 28px; }
-  .sc-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .sc-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; }
-  .sc-num.g { color: var(--green); } .sc-num.r { color: var(--red); }
-  .sc-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.qhead-text { flex: 1; }
+.qlabel { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.qtitle { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; }
+.teal { color: var(--teal); }
+.amber { color: var(--amber); }
 
-  .abtn { padding: 14px; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; width: 100%; max-width: 340px; text-align: center; }
-  .abtn:hover { transform: translateY(-2px); }
-  .abtn-teal  { background: linear-gradient(135deg, var(--teal-dim), var(--teal)); color: #fff; box-shadow: 0 4px 24px rgba(14,165,201,0.3); }
-  .abtn-teal:hover  { box-shadow: 0 8px 32px rgba(14,165,201,0.42); }
-  .abtn-amber { background: linear-gradient(135deg, #b45309, var(--amber)); color: #1a0e00; box-shadow: 0 4px 24px rgba(251,191,36,0.28); }
-  .abtn-amber:hover { box-shadow: 0 8px 32px rgba(251,191,36,0.38); }
-  .abtn-sec { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border) !important; box-shadow: none; }
-  .abtn-sec:hover { border-color: var(--text-muted) !important; color: var(--text); }
-  .abtn-home { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border) !important; box-shadow: none; }
-  .abtn-home:hover { border-color: var(--teal) !important; color: var(--teal); }
+/* Stats row */
+.stats {
+  display: flex; gap: 0;
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; margin-bottom: 14px;
+}
+.stat { flex: 1; text-align: center; padding: 10px 4px; }
+.stat + .stat { border-left: 1px solid var(--border); }
+.sn { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
+.sn.t { color: var(--teal); }
+.sn.g { color: var(--green); }
+.sn.r { color: var(--red); }
+.sl { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
-  @keyframes cardIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  .card-scene { animation: cardIn 0.3s ease; }
+/* Progress */
+.pbar-wrap { margin-bottom: 10px; }
+.pbar { height: 4px; background: var(--surf2); border-radius: 2px; overflow: hidden; margin-bottom: 5px; }
+.pfill { height: 100%; border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+.pfill.t { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+.pfill.a { background: linear-gradient(90deg, var(--amber), #f59e0b); }
+.plabels { display: flex; justify-content: space-between; font-size: 11px; color: var(--dim); }
 
-  @media (max-width: 480px) {
-    .home-title { font-size: 24px; }
-    .card-txt { font-size: 16px; }
-    .cb .card-txt { font-size: 14px; }
-    .kb-hint { display: none; }
-    :root { --card-h: 300px; }
-  }
+/* Mode buttons */
+.modes { display: flex; gap: 8px; margin-bottom: 16px; }
+.mbtn {
+  flex: 1; padding: 8px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surf);
+  color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: 12px; cursor: pointer; transition: all 0.2s;
+  appearance: none; -webkit-appearance: none;
+}
+.mbtn.at { background: var(--surf2); border-color: var(--teal); color: var(--teal); }
+.mbtn.aa { background: var(--surf2); border-color: var(--amber); color: var(--amber); }
+
+/* Flashcard */
+.card-area { perspective: 1000px; margin-bottom: 14px; }
+
+.card {
+  width: 100%; height: 300px;
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  cursor: pointer;
+}
+.card.flipped { transform: rotateY(180deg); }
+
+.face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--r);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 28px 22px; text-align: center;
+}
+
+.front {
+  background: var(--surf);
+  border-bottom: 3px solid transparent;
+}
+.front.t { border: 1.5px solid var(--border); border-top: 3px solid var(--teal); }
+.front.a { border: 1.5px solid #3a2e1a;   border-top: 3px solid var(--amber); }
+
+.back { transform: rotateY(180deg); }
+.back.t { background: var(--surf2); border: 1.5px solid rgba(14,165,201,0.35); border-top: 3px solid var(--cyan); }
+.back.a { background: var(--surf2); border: 1.5px solid rgba(251,191,36,0.35); border-top: 3px solid var(--amber); }
+
+.clabel {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.clabel::before, .clabel::after { content: ''; flex: 1; max-width: 24px; height: 1px; background: var(--border); }
+.clabel.t { color: var(--teal); }
+.clabel.a { color: var(--amber); }
+
+.ctext { font-size: 17px; font-weight: 500; line-height: 1.6; color: var(--text); white-space: pre-line; }
+.back .ctext { font-size: 15px; font-weight: 400; color: #c8dff0; }
+
+.chint { position: absolute; bottom: 14px; font-size: 11px; color: var(--dim); }
+
+/* Action buttons */
+.btns { display: flex; gap: 10px; margin-bottom: 10px; }
+
+.btn {
+  flex: 1; padding: 13px;
+  border: none; border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  appearance: none; -webkit-appearance: none;
+}
+.btn:active { transform: scale(0.96); }
+
+.bflip { background: var(--surf); color: var(--teal); border: 1px solid var(--border); flex: 0.55; }
+.bno   { background: var(--red-bg);   color: var(--red);   border: 1px solid rgba(248,113,113,0.2); }
+.byes  { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+
+.abts { display: flex; gap: 10px; flex: 1; }
+.abts .btn { opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.abts.show .btn { opacity: 1; pointer-events: all; }
+
+.kbhint { display: flex; gap: 14px; justify-content: center; font-size: 10px; color: var(--dim); }
+kbd { background: var(--surf2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 10px; color: var(--muted); }
+
+/* Done */
+#done {
+  padding-top: 32px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px;
+}
+.done-icon { font-size: 50px; }
+.done-h { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
+.score { display: flex; gap: 24px; background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 14px 26px; }
+.sc { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.scn { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; }
+.scn.g { color: var(--green); } .scn.r { color: var(--red); }
+.scl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.done-msg { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 320px; }
+
+.dbtn {
+  width: 100%; max-width: 340px; padding: 14px;
+  border-radius: 12px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; text-align: center;
+  appearance: none; -webkit-appearance: none;
+}
+.dbtn:active { transform: scale(0.97); }
+.dbtn.pt { background: linear-gradient(135deg, #0b7da0, var(--teal)); color: #fff; box-shadow: 0 4px 20px rgba(14,165,201,0.3); }
+.dbtn.pa { background: linear-gradient(135deg, #b45309, var(--amber)); color: #1a0e00; box-shadow: 0 4px 20px rgba(251,191,36,0.25); }
+.dbtn.sec { background: var(--surf); color: var(--muted); border: 1px solid var(--border); }
+.dbtn.hm  { background: var(--surf); color: var(--muted); border: 1px solid var(--border); }
+
+@media (max-width: 420px) {
+  .home-h1 { font-size: 24px; }
+  .ctext { font-size: 15px; }
+  .back .ctext { font-size: 13px; }
+  .card { height: 270px; }
+  .kbhint { display: none; }
+}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
-<div id="homeScreen">
-  <div class="home-eyebrow">Kapitel 4 · Zivilrecht für Unternehmen</div>
-  <h1 class="home-title">Wirtschafts<span>recht</span><br>Karteikarten</h1>
+<div id="home" class="screen">
+  <div class="eyebrow">Kapitel 4 · Zivilrecht für Unternehmen</div>
+  <h1 class="home-h1">Wirtschafts<em>recht</em><br>Karteikarten</h1>
   <p class="home-sub">Wähle ein Set zum Lernen</p>
 
-  <div class="set-cards">
-    <div class="set-card s1" id="setCard1">
-      <div class="set-card-top">
-        <div>
-          <div class="set-badge">Set 1 · Empfohlen</div>
-          <div class="set-title" style="margin-top:10px">Kernkonzepte Unternehmensrecht</div>
-        </div>
-        <div class="set-count">20<small>Karten</small></div>
+  <button class="set-btn s1" id="btn1" type="button">
+    <div class="set-top">
+      <div>
+        <div class="set-badge">Set 1 · Empfohlen</div>
+        <div class="set-name">Kernkonzepte Unternehmensrecht</div>
       </div>
-      <div class="set-desc">Grundlegende Themen: UGB, Firmenbuch, Vollmachten, Prokura, Firmennamen und Vermittler.</div>
-      <div class="set-tags">
-        <span class="tag">UGB & Unternehmer</span>
-        <span class="tag">Firmenbuch</span>
-        <span class="tag">Prokura</span>
-        <span class="tag">Handlungsvollmacht</span>
-        <span class="tag">Firmenrecht</span>
-        <span class="tag">Kommission & Makler</span>
-      </div>
-      <div class="set-arrow">→</div>
+      <div class="set-count">20<span>Karten</span></div>
     </div>
+    <div class="set-desc">Grundlegende Themen: UGB, Firmenbuch, Vollmachten, Prokura, Firmennamen und Vermittler.</div>
+    <div class="tags">
+      <span class="tag">UGB & Unternehmer</span>
+      <span class="tag">Firmenbuch</span>
+      <span class="tag">Prokura</span>
+      <span class="tag">Handlungsvollmacht</span>
+      <span class="tag">Firmenrecht</span>
+      <span class="tag">Makler & Kommission</span>
+    </div>
+    <div class="arrow">→</div>
+  </button>
 
-    <div class="set-card s2" id="setCard2">
-      <div class="set-card-top">
-        <div>
-          <div class="set-badge">Set 2 · Erweitert</div>
-          <div class="set-title" style="margin-top:10px">Vertiefung & Übungsaufgaben</div>
-        </div>
-        <div class="set-count">43<small>Karten</small></div>
+  <button class="set-btn s2" id="btn2" type="button">
+    <div class="set-top">
+      <div>
+        <div class="set-badge">Set 2 · Erweitert</div>
+        <div class="set-name">Vertiefung & Übungsaufgaben</div>
       </div>
-      <div class="set-desc">Detailliertere Fragen inkl. Übungsaufgaben (Ü 4.x), Grenzfälle und Spezialthemen.</div>
-      <div class="set-tags">
-        <span class="tag">Filialprokura</span>
-        <span class="tag">Negative Publizität</span>
-        <span class="tag">Laden- & Lagervollmacht</span>
-        <span class="tag">Übungsaufgaben</span>
-        <span class="tag">GmbH & OG</span>
-      </div>
-      <div class="set-warn">⚠️ Enthält möglicherweise Fehler – Antworten kritisch prüfen!</div>
-      <div class="set-arrow">→</div>
+      <div class="set-count">43<span>Karten</span></div>
     </div>
-  </div>
+    <div class="set-desc">Detailliertere Fragen inkl. Übungsaufgaben (Ü 4.x), Grenzfälle und Spezialthemen.</div>
+    <div class="tags">
+      <span class="tag">Filialprokura</span>
+      <span class="tag">Negative Publizität</span>
+      <span class="tag">Lagervollmacht</span>
+      <span class="tag">Übungsaufgaben</span>
+      <span class="tag">GmbH & OG</span>
+    </div>
+    <div class="warn">⚠️ Möglicherweise Fehler – Antworten kritisch prüfen!</div>
+    <div class="arrow">→</div>
+  </button>
 </div>
 
 <!-- QUIZ -->
-<div id="quizScreen">
-  <div class="qheader">
-    <button class="back-btn" onclick="goHome()">←</button>
-    <div class="qheader-info">
-      <div class="qheader-label" id="qLabel"></div>
-      <div class="qheader-title" id="qTitle"></div>
+<div id="quiz" class="screen hidden">
+  <div class="qhead">
+    <button class="back" id="backBtn" type="button">←</button>
+    <div class="qhead-text">
+      <div class="qlabel" id="qlabel"></div>
+      <div class="qtitle" id="qtitle"></div>
     </div>
   </div>
 
-  <div class="stats-wrap">
-    <div class="stats">
-      <div class="stat"><div class="snum" id="stTotal">0</div><div class="slbl">Gesamt</div></div>
-      <div class="sdiv"></div>
-      <div class="stat"><div class="snum" id="stCurrent">1</div><div class="slbl">Aktuell</div></div>
-      <div class="sdiv"></div>
-      <div class="stat"><div class="snum g" id="stKnow">0</div><div class="slbl">Kann ich ✓</div></div>
-      <div class="sdiv"></div>
-      <div class="stat"><div class="snum r" id="stAgain">0</div><div class="slbl">Nochmal ✗</div></div>
-    </div>
+  <div class="stats">
+    <div class="stat"><div class="sn t" id="stTotal">0</div><div class="sl">Gesamt</div></div>
+    <div class="stat"><div class="sn t" id="stCur">1</div><div class="sl">Aktuell</div></div>
+    <div class="stat"><div class="sn g" id="stKnow">0</div><div class="sl">Kann ich ✓</div></div>
+    <div class="stat"><div class="sn r" id="stAgain">0</div><div class="sl">Nochmal ✗</div></div>
   </div>
 
-  <div class="prog-wrap">
-    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
-    <div class="prog-labels"><span id="progLeft">0 / 0 erledigt</span><span id="progPct">0%</span></div>
+  <div class="pbar-wrap">
+    <div class="pbar"><div class="pfill" id="pfill"></div></div>
+    <div class="plabels"><span id="pleft">0 / 0 erledigt</span><span id="ppct">0%</span></div>
   </div>
 
-  <div class="mode-bar">
-    <button class="mbtn" id="mbAll" onclick="setMode('all')">🃏 Alle</button>
-    <button class="mbtn" id="mbAgain" onclick="setMode('again')">🔁 Nochmal (0)</button>
+  <div class="modes">
+    <button class="mbtn" id="mbAll" type="button">🃏 Alle</button>
+    <button class="mbtn" id="mbAgain" type="button">🔁 Nochmal (0)</button>
   </div>
 
-  <div class="card-wrap">
-    <div class="card-scene" id="cardScene" onclick="flipCard()">
-      <div class="card-inner" id="cardInner">
-        <div class="card-face cf">
-          <div class="card-lbl">Frage</div>
-          <div class="card-txt" id="frontTxt"></div>
-          <div class="card-hint">Tippe zum Umdrehen</div>
-        </div>
-        <div class="card-face cb">
-          <div class="card-lbl">Antwort</div>
-          <div class="card-txt" id="backTxt"></div>
-          <div class="card-hint" style="color:var(--teal-dim)">Wähle unten</div>
-        </div>
+  <div class="card-area">
+    <div class="card" id="card">
+      <div class="face front" id="front">
+        <div class="clabel" id="flbl">Frage</div>
+        <div class="ctext" id="ftxt"></div>
+        <div class="chint">Tippe zum Umdrehen</div>
+      </div>
+      <div class="face back" id="back">
+        <div class="clabel" id="blbl">Antwort</div>
+        <div class="ctext" id="btxt"></div>
+        <div class="chint">Wähle unten</div>
       </div>
     </div>
   </div>
 
-  <div class="actions">
-    <button class="btn btn-flip" onclick="flipCard()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"/></svg>
-      Umdrehen
-    </button>
-    <div class="ans-btns" id="ansBtns">
-      <button class="btn btn-no" onclick="answer(false)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        Nochmal
-      </button>
-      <button class="btn btn-yes" onclick="answer(true)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Kann ich!
-      </button>
+  <div class="btns">
+    <button class="btn bflip" id="flipBtn" type="button">↩ Umdrehen</button>
+    <div class="abts" id="abts">
+      <button class="btn bno"  id="noBtn"  type="button">✗ Nochmal</button>
+      <button class="btn byes" id="yesBtn" type="button">✓ Kann ich!</button>
     </div>
   </div>
 
-  <div class="kb-hint">
+  <div class="kbhint">
     <span class="kb-key"><kbd>Space</kbd> umdrehen</span>
     <span class="kb-key"><kbd>←</kbd> Nochmal</span>
     <span class="kb-key"><kbd>→</kbd> Kann ich!</span>
     <span class="kb-key"><kbd>Esc</kbd> Zurück</span>
   </div>
+</div>
 
-  <div class="done" id="doneScreen">
-    <div class="done-icon">🎉</div>
-    <h2>Runde abgeschlossen!</h2>
-    <div class="score-box">
-      <div class="sc-item"><div class="sc-num g" id="dKnow">0</div><div class="sc-lbl">Kann ich</div></div>
-      <div class="sc-item"><div class="sc-num r" id="dAgain">0</div><div class="sc-lbl">Nochmal</div></div>
-    </div>
-    <p id="doneMsg"></p>
-    <button class="abtn" id="btnRestart" onclick="restart()">🔁 Alle Karten wiederholen</button>
-    <button class="abtn abtn-sec" id="btnOnlyAgain" onclick="restartAgain()" style="display:none">🎯 Nur Nochmal-Karten</button>
-    <button class="abtn abtn-home" onclick="goHome()">🏠 Zurück zur Set-Auswahl</button>
+<!-- DONE -->
+<div id="done" class="screen hidden">
+  <div class="done-icon">🎉</div>
+  <div class="done-h">Runde abgeschlossen!</div>
+  <div class="score">
+    <div class="sc"><div class="scn g" id="dKnow">0</div><div class="scl">Kann ich</div></div>
+    <div class="sc"><div class="scn r" id="dAgain">0</div><div class="scl">Nochmal</div></div>
   </div>
+  <div class="done-msg" id="dmsg"></div>
+  <button class="dbtn" id="dRestart" type="button">🔁 Alle Karten wiederholen</button>
+  <button class="dbtn sec" id="dAgainOnly" type="button">🎯 Nur Nochmal-Karten</button>
+  <button class="dbtn hm"  id="dHome"    type="button">🏠 Zurück zur Set-Auswahl</button>
 </div>
 
 <script>
-const SETS = {
+'use strict';
+
+// ── DATA ──────────────────────────────────────────────────────────────
+const DATA = {
   1: {
-    label: 'Set 1 · Empfohlen',
-    title: 'Kernkonzepte Unternehmensrecht',
-    labelClass: 'c-teal',
-    theme: 'th-teal',
-    progClass: 'pf-teal',
-    modeActive: 'on-teal',
-    btnClass: 'abtn-teal',
+    label: 'Set 1 · Empfohlen', title: 'Kernkonzepte',
+    th: 't',
     cards: [
-      { q: "Ab wann gilt eine Tätigkeit als „unternehmerisch" im Sinne des UGB?", a: "Wenn sie selbstständig, auf Dauer angelegt, mit einer Organisation versehen ist und Leistungen gegen Entgelt am Markt anbietet." },
-      { q: "Wer gilt als Unternehmer „kraft Rechtsform"?", a: "Bestimmte juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV." },
-      { q: "Richtig oder Falsch? Ein Sportverein, der seine Ausgaben ausschließlich durch Mitgliedsbeiträge deckt, ist Unternehmer im Sinne des UGB.", a: "❌ FALSCH. Er erbringt keine Leistungen gegen Entgelt am Markt, um seine Kosten zu decken." },
-      { q: "Was ist der Unterschied zwischen deklarativer und konstitutiver Wirkung im Firmenbuch?", a: "Deklarativ: Die Rechtslage besteht bereits (z. B. Prokuraerteilung).\nKonstitutiv: Die Rechtslage entsteht erst durch die Eintragung (z. B. Gründung einer GmbH)." },
-      { q: "Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a: "✅ JA. Das Firmenbuch ist ein öffentliches Verzeichnis und gegen Gebühr für jedermann zugänglich." },
-      { q: "Welchen zwingenden Firmenzusatz benötigt ein im Firmenbuch eingetragener Einzelunternehmer?", a: "Den Zusatz „e.U." (eingetragene Unternehmerin / eingetragener Unternehmer)." },
-      { q: "Darf ein Prokurist ohne spezielle Erlaubnis eine Hypothek auf ein Betriebsgrundstück aufnehmen?", a: "❌ NEIN. Zur Belastung (und zum Verkauf) von Grundstücken ist eine Spezialvollmacht erforderlich." },
-      { q: "Was bedeutet das Kürzel „ppa." vor einer Unterschrift?", a: "„per procura" – es kennzeichnet, dass die Person mit einer Prokura zeichnet." },
-      { q: "Richtig oder Falsch? Die Prokura kann auch schlüssig (durch bloßes Handeln) erteilt werden.", a: "❌ FALSCH. Die Prokura muss ausdrücklich (mündlich oder schriftlich) erteilt werden." },
-      { q: "Darf ein Generalhandlungsvollmächtigter für das Unternehmen eigenständig Kredite aufnehmen?", a: "❌ NEIN. Für die Aufnahme von Darlehen (Krediten) ist gesetzlich eine Spezialvollmacht vorgeschrieben." },
-      { q: "Wie muss ein Handlungsbevollmächtigter im Gegensatz zum Prokuristen unterschreiben?", a: "Mit einem Zusatz, der die Handlungsvollmacht andeutet: „i.V." (in Vertretung) oder „i.A." (im Auftrag)." },
-      { q: "Richtig oder Falsch? Eine Handlungsvollmacht kann im Gegensatz zur Prokura auch schlüssig erteilt werden.", a: "✅ RICHTIG." },
-      { q: "Was ist der entscheidende Unterschied zwischen einem Handelsvertreter und einem Makler?", a: "Der Handelsvertreter ist ständig mit der Vermittlung betraut; der Makler wird nur im Einzelfall (gelegentlich) tätig." },
-      { q: "Wer trägt das wirtschaftliche Risiko beim Kommissionsgeschäft?", a: "Der Kommittent – der Kommissionär handelt zwar im eigenen Namen, aber für fremde Rechnung." },
-      { q: "Richtig oder Falsch? Ein Spediteur ist eine Person, die den physischen Transport der Ware selbst durchführt.", a: "❌ FALSCH. Der Spediteur organisiert den Transport; die Person, die ihn durchführt, ist der Frachtführer." },
-      { q: "Welcher Grundsatz besagt, dass eine neue Firma sich deutlich von bereits bestehenden Firmen am selben Ort unterscheiden muss?", a: "Der Grundsatz der Firmenausschließlichkeit." },
-      { q: "Darf ein Einzelunternehmen unter einer reinen Sachbezeichnung wie „Bäckerei" ohne weitere Zusätze geführt werden?", a: "❌ NEIN. Die Firma muss den Namen des Inhabers oder eine Fantasiebezeichnung mit dem Zusatz „e.U." enthalten." },
-      { q: "Was versteht man unter einer „Gesamtprokura"?", a: "Eine Prokura, die an mehrere Personen so erteilt wurde, dass sie nur gemeinsam zeichnungsberechtigt sind." },
-      { q: "Richtig oder Falsch? Ein Makler kann als Doppelmakler für beide Vertragsparteien tätig sein.", a: "✅ RICHTIG – er muss dabei jedoch die Interessen beider Parteien gleichermaßen wahren." },
-      { q: "Welche fünf Informationen müssen zwingend auf den Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmens stehen?", a: "1. Firma\n2. Rechtsform\n3. Sitz des Unternehmens\n4. Firmenbuchnummer\n5. Firmenbuchgericht" },
+      {q:"Ab wann gilt eine Tätigkeit als „unternehmerisch" im Sinne des UGB?", a:"Wenn sie selbstständig, auf Dauer angelegt, mit einer Organisation versehen ist und Leistungen gegen Entgelt am Markt anbietet."},
+      {q:"Wer gilt als Unternehmer „kraft Rechtsform"?", a:"Bestimmte juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV."},
+      {q:"Richtig oder Falsch? Ein Sportverein, der seine Ausgaben ausschließlich durch Mitgliedsbeiträge deckt, ist Unternehmer im Sinne des UGB.", a:"❌ FALSCH. Er erbringt keine Leistungen gegen Entgelt am Markt, um seine Kosten zu decken."},
+      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Wirkung im Firmenbuch?", a:"Deklarativ: Die Rechtslage besteht bereits (z. B. Prokuraerteilung).\nKonstitutiv: Die Rechtslage entsteht erst durch die Eintragung (z. B. Gründung einer GmbH)."},
+      {q:"Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a:"✅ JA. Das Firmenbuch ist ein öffentliches Verzeichnis und gegen Gebühr für jedermann zugänglich."},
+      {q:"Welchen zwingenden Firmenzusatz benötigt ein im Firmenbuch eingetragener Einzelunternehmer?", a:"Den Zusatz „e.U." (eingetragene Unternehmerin / eingetragener Unternehmer)."},
+      {q:"Darf ein Prokurist ohne spezielle Erlaubnis eine Hypothek auf ein Betriebsgrundstück aufnehmen?", a:"❌ NEIN. Zur Belastung (und zum Verkauf) von Grundstücken ist eine Spezialvollmacht erforderlich."},
+      {q:"Was bedeutet das Kürzel „ppa." vor einer Unterschrift?", a:"„per procura" – es kennzeichnet, dass die Person mit einer Prokura zeichnet."},
+      {q:"Richtig oder Falsch? Die Prokura kann auch schlüssig (durch bloßes Handeln) erteilt werden.", a:"❌ FALSCH. Die Prokura muss ausdrücklich (mündlich oder schriftlich) erteilt werden."},
+      {q:"Darf ein Generalhandlungsvollmächtigter für das Unternehmen eigenständig Kredite aufnehmen?", a:"❌ NEIN. Für die Aufnahme von Darlehen (Krediten) ist gesetzlich eine Spezialvollmacht vorgeschrieben."},
+      {q:"Wie muss ein Handlungsbevollmächtigter im Gegensatz zum Prokuristen unterschreiben?", a:"Mit einem Zusatz, der die Handlungsvollmacht andeutet: „i.V." (in Vertretung) oder „i.A." (im Auftrag)."},
+      {q:"Richtig oder Falsch? Eine Handlungsvollmacht kann im Gegensatz zur Prokura auch schlüssig erteilt werden.", a:"✅ RICHTIG."},
+      {q:"Was ist der entscheidende Unterschied zwischen einem Handelsvertreter und einem Makler?", a:"Der Handelsvertreter ist ständig mit der Vermittlung betraut; der Makler wird nur im Einzelfall (gelegentlich) tätig."},
+      {q:"Wer trägt das wirtschaftliche Risiko beim Kommissionsgeschäft?", a:"Der Kommittent – der Kommissionär handelt zwar im eigenen Namen, aber für fremde Rechnung."},
+      {q:"Richtig oder Falsch? Ein Spediteur ist eine Person, die den physischen Transport der Ware selbst durchführt.", a:"❌ FALSCH. Der Spediteur organisiert den Transport; die Person, die ihn durchführt, ist der Frachtführer."},
+      {q:"Welcher Grundsatz besagt, dass eine neue Firma sich deutlich von bereits bestehenden Firmen am selben Ort unterscheiden muss?", a:"Der Grundsatz der Firmenausschließlichkeit."},
+      {q:"Darf ein Einzelunternehmen unter einer reinen Sachbezeichnung wie „Bäckerei" ohne weitere Zusätze geführt werden?", a:"❌ NEIN. Die Firma muss den Namen des Inhabers oder eine Fantasiebezeichnung mit dem Zusatz „e.U." enthalten."},
+      {q:"Was versteht man unter einer „Gesamtprokura"?", a:"Eine Prokura, die an mehrere Personen so erteilt wurde, dass sie nur gemeinsam zeichnungsberechtigt sind."},
+      {q:"Richtig oder Falsch? Ein Makler kann als Doppelmakler für beide Vertragsparteien tätig sein.", a:"✅ RICHTIG – er muss dabei jedoch die Interessen beider Parteien gleichermaßen wahren."},
+      {q:"Welche fünf Informationen müssen zwingend auf den Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmens stehen?", a:"1. Firma\n2. Rechtsform\n3. Sitz des Unternehmens\n4. Firmenbuchnummer\n5. Firmenbuchgericht"},
     ]
   },
   2: {
-    label: 'Set 2 · Erweitert',
-    title: 'Vertiefung & Übungsaufgaben',
-    labelClass: 'c-amber',
-    theme: 'th-amber',
-    progClass: 'pf-amber',
-    modeActive: 'on-amber',
-    btnClass: 'abtn-amber',
+    label: 'Set 2 · Erweitert', title: 'Vertiefung & Übungen',
+    th: 'a',
     cards: [
-      { q: "Welche vier Merkmale definieren eine unternehmerische Tätigkeit?", a: "Selbstständigkeit, Dauerhaftigkeit, Organisation und Angebot von Leistungen gegen Entgelt am Markt." },
-      { q: "Wer gilt als Unternehmer kraft Rechtsform?", a: "Juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV." },
-      { q: "Gilt ein Rechtsanwalt immer als Unternehmer im Sinne aller UGB-Vorschriften?", a: "Nein, für freie Berufe gelten nur die Regeln über unternehmensbezogene Geschäfte, es sei denn, sie sind kraft Rechtsform oder Eintragung Unternehmer." },
-      { q: "Ü 4.2: Ist eine Druckerei ein Unternehmen im Sinne des UGB?", a: "Ja, da sie alle Merkmale einer unternehmerischen Tätigkeit erfüllt." },
-      { q: "Ü 4.2: Ist ein Sportverein, der sich nur durch Mitgliedsbeiträge finanziert, ein Unternehmen im Sinne des UGB?", a: "Nein, da er keine Leistungen gegen Entgelt am Markt anbietet, um seine Kosten zu decken." },
-      { q: "Was ist der Unterschied zwischen deklarativer und konstitutiver Eintragung im Firmenbuch?", a: "Deklarativ: Rechtslage besteht schon (z.B. Prokura).\nKonstitutiv: Rechtslage entsteht erst durch Eintragung (z.B. GmbH-Gründung)." },
-      { q: "Was besagt die negative Publizität des Firmenbuchs?", a: "Dass Tatsachen, die eingetragen und bekanntgemacht werden müssten, einem Dritten nicht entgegengehalten werden können, wenn sie nicht eingetragen sind." },
-      { q: "Ü 4.4: Können sich Landwirtinnen in das Firmenbuch eintragen lassen?", a: "Richtig, sie können sich freiwillig eintragen lassen." },
-      { q: "Ab welcher Umsatzschwelle müssen sich Einzelunternehmer zwingend ins Firmenbuch eintragen lassen?", a: "Wenn der Umsatz in zwei aufeinanderfolgenden Jahren jeweils 700.000 € übersteigt." },
-      { q: "Ü 4.5: Wird ein neues Unternehmen automatisch in das Firmenbuch eingetragen?", a: "Falsch, die Eintragung erfolgt nur auf Antrag des Unternehmers (Protokollierung)." },
-      { q: "Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a: "Ja, gegen Gebühr ist die Einsicht für jedermann möglich." },
-      { q: "Was ist die Voraussetzung für eine wirksame direkte Stellvertretung?", a: "Offenlegung (Handeln im fremden Namen) und Vertretungsmacht (Berechtigung)." },
-      { q: "Ü 4.8: Ist eine Person verpflichtet, eine Bestellung aufzugeben, nur weil sie eine Vollmacht dazu erhalten hat?", a: "Nein, die Vollmacht ist ein rechtliches Können (Willenserklärung), keine Verpflichtung zum Handeln." },
-      { q: "Wie muss die Prokura erteilt werden?", a: "Ausdrücklich (mündlich oder schriftlich) und sie muss ins Firmenbuch eingetragen werden." },
-      { q: "Was umfasst der gesetzlich fixierte Umfang der Prokura?", a: "Alle Arten von gerichtlichen und außergerichtlichen Geschäften und Rechtshandlungen, die der Betrieb eines Unternehmens mit sich bringt." },
-      { q: "Welche Handlungen sind einem Prokuristen gesetzlich untersagt (ohne Spezialvollmacht)?", a: "Veräußerung/Belastung von Grundstücken, Einstellung des Betriebs, Erteilung der Prokura, Unterzeichnung von Bilanz/Inventar." },
-      { q: "Was versteht man unter einer „Filialprokura"?", a: "Die Beschränkung der Vertretungsmacht auf eine oder mehrere bestimmte Zweigniederlassungen." },
-      { q: "Wie unterschreibt ein Prokurist korrekt?", a: "Mit dem Firmennamen, dem eigenen Namen und einem Zusatz wie „ppa." oder „pp."." },
-      { q: "Ü 4.10: Darf ein Prokurist ein Kfz für das Unternehmen anmelden?", a: "Ja, das gehört zum gewöhnlichen Betrieb eines Unternehmens." },
-      { q: "Ü 4.10: Darf ein Prokurist einen Kredit für das Unternehmen aufnehmen?", a: "Ja, im Gegensatz zum Handlungsbevollmächtigten darf der Prokurist Kredite aufnehmen." },
-      { q: "Kann eine Handlungsvollmacht auch schlüssig (stillschweigend) erteilt werden?", a: "Ja, sie kann ausdrücklich oder schlüssig erteilt werden." },
-      { q: "Welche drei Arten der Handlungsvollmacht gibt es?", a: "Generalhandlungsvollmacht, Arthandlungsvollmacht und Spezialhandlungsvollmacht." },
-      { q: "Darf ein Handlungsbevollmächtigter ohne Spezialvollmacht Darlehen aufnehmen oder den Betrieb vor Gericht vertreten?", a: "Nein, diese Geschäfte sind ihm gesetzlich untersagt." },
-      { q: "Wie unterschreibt ein Handlungsbevollmächtigter?", a: "Mit einem Zusatz wie „i.V." (in Vertretung) oder „i.A." (im Auftrag)." },
-      { q: "Was ist eine Laden- und Lagervollmacht?", a: "Wer in einem Laden tätig ist, gilt als ermächtigt, Waren zu verkaufen und den Kaufpreis in Empfang zu nehmen." },
-      { q: "Ü 4.12: Ist eine interne Beschränkung der Prokura (z.B. Limit bis 50.000 €) gegenüber Dritten wirksam?", a: "Nein, solche inhaltlichen Beschränkungen sind Dritten gegenüber unwirksam." },
-      { q: "Was bezeichnet die „Firma" im rechtlichen Sinne?", a: "Den in das Firmenbuch eingetragenen Namen eines Unternehmers, unter dem er seine Geschäfte betreibt und unterschreibt." },
-      { q: "Welchen Zusatz benötigt eine Kommanditgesellschaft zwingend in ihrer Firma?", a: "„KG"." },
-      { q: "Was besagt der Grundsatz der Firmenwahrheit?", a: "Die Firma darf keine Angaben enthalten, die über die Art oder den Umfang des Geschäfts täuschen." },
-      { q: "Was besagt der Grundsatz der Firmenausschließlichkeit?", a: "Jede neue Firma muss sich von bereits bestehenden Firmen am selben Ort deutlich unterscheiden." },
-      { q: "Ü 4.13: Ist die Firma „Foto KG" für ein Einzelunternehmen zulässig?", a: "Nein, da der Zusatz „KG" eine Gesellschaft suggeriert, die nicht existiert (Verstoß gegen Firmenwahrheit)." },
-      { q: "Welche Angaben müssen zwingend auf Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmers stehen?", a: "Firma, Rechtsform, Sitz, Firmenbuchnummer und Firmenbuchgericht." },
-      { q: "Was ist die Hauptaufgabe eines Spediteurs?", a: "Die Organisation des Gütertransports (Versendung) für Rechnung eines anderen im eigenen Namen." },
-      { q: "Was unterscheidet den Kommissionär vom Handelsvertreter?", a: "Der Kommissionär handelt im eigenen Namen (für fremde Rechnung), der Handelsvertreter handelt in fremdem Namen." },
-      { q: "Wann hat ein Makler Anspruch auf seine Provision (Courtage)?", a: "Wenn er verdienstlich tätig geworden ist und das Geschäft durch seine Vermittlung abgeschlossen wurde." },
-      { q: "Was ist ein „Doppelmakler"?", a: "Ein Makler, der für beide Vertragsparteien (z.B. Käufer und Verkäufer) gleichzeitig tätig ist." },
-      { q: "Ü 4.15: Wie nennt man ein selbstständiges Unternehmen, das die Marke und das Know-how eines anderen gegen Entgelt nutzt?", a: "Franchisenehmer." },
-      { q: "Ü 4.17: Darf ein Unternehmer den Namen eines Konkurrenten als Werbebezeichnung nutzen, wenn er dadurch Verwechslungen hervorruft?", a: "Nein, das widerspricht dem Firmenrecht und dem Wettbewerbsrecht." },
-      { q: "Ü 4.22: Muss ein Kredit, den ein Prokurist trotz internem Verbot aufgenommen hat, vom Unternehmen zurückgezahlt werden?", a: "Ja, da die Beschränkung der Prokura gegenüber der Bank (Dritten) unwirksam ist." },
-      { q: "K 4.1: Wer veranlasst die Eintragungen im Firmenbuch?", a: "Das Unternehmen bzw. dessen vertretungsbefugte Organe durch einen entsprechenden Antrag." },
-      { q: "Welche Rechtsform hat eine „GmbH"?", a: "Gesellschaft mit beschränkter Haftung (Kapitalgesellschaft)." },
-      { q: "Wer haftet bei einer OG (Offene Gesellschaft) für die Schulden?", a: "Die Gesellschafter haften persönlich, unbeschränkt und solidarisch auch mit ihrem Privatvermögen." },
-      { q: "Welches Mindeststammkapital ist für die Gründung einer GmbH erforderlich?", a: "Grundsätzlich 35.000 € (davon müssen bei der Gründung mindestens 17.500 € eingezahlt sein; beachte auch gründungsprivilegierte GmbH)." },
+      {q:"Welche vier Merkmale definieren eine unternehmerische Tätigkeit?", a:"Selbstständigkeit, Dauerhaftigkeit, Organisation und Angebot von Leistungen gegen Entgelt am Markt."},
+      {q:"Wer gilt als Unternehmer kraft Rechtsform?", a:"Juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV."},
+      {q:"Gilt ein Rechtsanwalt immer als Unternehmer im Sinne aller UGB-Vorschriften?", a:"Nein, für freie Berufe gelten nur die Regeln über unternehmensbezogene Geschäfte, es sei denn, sie sind kraft Rechtsform oder Eintragung Unternehmer."},
+      {q:"Ü 4.2: Ist eine Druckerei ein Unternehmen im Sinne des UGB?", a:"Ja, da sie alle Merkmale einer unternehmerischen Tätigkeit erfüllt."},
+      {q:"Ü 4.2: Ist ein Sportverein, der sich nur durch Mitgliedsbeiträge finanziert, ein Unternehmen im Sinne des UGB?", a:"Nein, da er keine Leistungen gegen Entgelt am Markt anbietet, um seine Kosten zu decken."},
+      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Eintragung im Firmenbuch?", a:"Deklarativ: Rechtslage besteht schon (z.B. Prokura).\nKonstitutiv: Rechtslage entsteht erst durch Eintragung (z.B. GmbH-Gründung)."},
+      {q:"Was besagt die negative Publizität des Firmenbuchs?", a:"Dass Tatsachen, die eingetragen und bekanntgemacht werden müssten, einem Dritten nicht entgegengehalten werden können, wenn sie nicht eingetragen sind."},
+      {q:"Ü 4.4: Können sich Landwirtinnen in das Firmenbuch eintragen lassen?", a:"Richtig, sie können sich freiwillig eintragen lassen."},
+      {q:"Ab welcher Umsatzschwelle müssen sich Einzelunternehmer zwingend ins Firmenbuch eintragen lassen?", a:"Wenn der Umsatz in zwei aufeinanderfolgenden Jahren jeweils 700.000 € übersteigt."},
+      {q:"Ü 4.5: Wird ein neues Unternehmen automatisch in das Firmenbuch eingetragen?", a:"Falsch, die Eintragung erfolgt nur auf Antrag des Unternehmers (Protokollierung)."},
+      {q:"Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a:"Ja, gegen Gebühr ist die Einsicht für jedermann möglich."},
+      {q:"Was ist die Voraussetzung für eine wirksame direkte Stellvertretung?", a:"Offenlegung (Handeln im fremden Namen) und Vertretungsmacht (Berechtigung)."},
+      {q:"Ü 4.8: Ist eine Person verpflichtet, eine Bestellung aufzugeben, nur weil sie eine Vollmacht dazu erhalten hat?", a:"Nein, die Vollmacht ist ein rechtliches Können (Willenserklärung), keine Verpflichtung zum Handeln."},
+      {q:"Wie muss die Prokura erteilt werden?", a:"Ausdrücklich (mündlich oder schriftlich) und sie muss ins Firmenbuch eingetragen werden."},
+      {q:"Was umfasst der gesetzlich fixierte Umfang der Prokura?", a:"Alle Arten von gerichtlichen und außergerichtlichen Geschäften und Rechtshandlungen, die der Betrieb eines Unternehmens mit sich bringt."},
+      {q:"Welche Handlungen sind einem Prokuristen gesetzlich untersagt (ohne Spezialvollmacht)?", a:"Veräußerung/Belastung von Grundstücken, Einstellung des Betriebs, Erteilung der Prokura, Unterzeichnung von Bilanz/Inventar."},
+      {q:"Was versteht man unter einer „Filialprokura"?", a:"Die Beschränkung der Vertretungsmacht auf eine oder mehrere bestimmte Zweigniederlassungen."},
+      {q:"Wie unterschreibt ein Prokurist korrekt?", a:"Mit dem Firmennamen, dem eigenen Namen und einem Zusatz wie „ppa." oder „pp."."},
+      {q:"Ü 4.10: Darf ein Prokurist ein Kfz für das Unternehmen anmelden?", a:"Ja, das gehört zum gewöhnlichen Betrieb eines Unternehmens."},
+      {q:"Ü 4.10: Darf ein Prokurist einen Kredit für das Unternehmen aufnehmen?", a:"Ja, im Gegensatz zum Handlungsbevollmächtigten darf der Prokurist Kredite aufnehmen."},
+      {q:"Kann eine Handlungsvollmacht auch schlüssig (stillschweigend) erteilt werden?", a:"Ja, sie kann ausdrücklich oder schlüssig erteilt werden."},
+      {q:"Welche drei Arten der Handlungsvollmacht gibt es?", a:"Generalhandlungsvollmacht, Arthandlungsvollmacht und Spezialhandlungsvollmacht."},
+      {q:"Darf ein Handlungsbevollmächtigter ohne Spezialvollmacht Darlehen aufnehmen oder den Betrieb vor Gericht vertreten?", a:"Nein, diese Geschäfte sind ihm gesetzlich untersagt."},
+      {q:"Wie unterschreibt ein Handlungsbevollmächtigter?", a:"Mit einem Zusatz wie „i.V." (in Vertretung) oder „i.A." (im Auftrag)."},
+      {q:"Was ist eine Laden- und Lagervollmacht?", a:"Wer in einem Laden tätig ist, gilt als ermächtigt, Waren zu verkaufen und den Kaufpreis in Empfang zu nehmen."},
+      {q:"Ü 4.12: Ist eine interne Beschränkung der Prokura (z.B. Limit bis 50.000 €) gegenüber Dritten wirksam?", a:"Nein, solche inhaltlichen Beschränkungen sind Dritten gegenüber unwirksam."},
+      {q:"Was bezeichnet die „Firma" im rechtlichen Sinne?", a:"Den in das Firmenbuch eingetragenen Namen eines Unternehmers, unter dem er seine Geschäfte betreibt und unterschreibt."},
+      {q:"Welchen Zusatz benötigt eine Kommanditgesellschaft zwingend in ihrer Firma?", a:"„KG"."},
+      {q:"Was besagt der Grundsatz der Firmenwahrheit?", a:"Die Firma darf keine Angaben enthalten, die über die Art oder den Umfang des Geschäfts täuschen."},
+      {q:"Was besagt der Grundsatz der Firmenausschließlichkeit?", a:"Jede neue Firma muss sich von bereits bestehenden Firmen am selben Ort deutlich unterscheiden."},
+      {q:"Ü 4.13: Ist die Firma „Foto KG" für ein Einzelunternehmen zulässig?", a:"Nein, da der Zusatz „KG" eine Gesellschaft suggeriert, die nicht existiert (Verstoß gegen Firmenwahrheit)."},
+      {q:"Welche Angaben müssen zwingend auf Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmers stehen?", a:"Firma, Rechtsform, Sitz, Firmenbuchnummer und Firmenbuchgericht."},
+      {q:"Was ist die Hauptaufgabe eines Spediteurs?", a:"Die Organisation des Gütertransports (Versendung) für Rechnung eines anderen im eigenen Namen."},
+      {q:"Was unterscheidet den Kommissionär vom Handelsvertreter?", a:"Der Kommissionär handelt im eigenen Namen (für fremde Rechnung), der Handelsvertreter handelt in fremdem Namen."},
+      {q:"Wann hat ein Makler Anspruch auf seine Provision (Courtage)?", a:"Wenn er verdienstlich tätig geworden ist und das Geschäft durch seine Vermittlung abgeschlossen wurde."},
+      {q:"Was ist ein „Doppelmakler"?", a:"Ein Makler, der für beide Vertragsparteien (z.B. Käufer und Verkäufer) gleichzeitig tätig ist."},
+      {q:"Ü 4.15: Wie nennt man ein selbstständiges Unternehmen, das die Marke und das Know-how eines anderen gegen Entgelt nutzt?", a:"Franchisenehmer."},
+      {q:"Ü 4.17: Darf ein Unternehmer den Namen eines Konkurrenten als Werbebezeichnung nutzen, wenn er dadurch Verwechslungen hervorruft?", a:"Nein, das widerspricht dem Firmenrecht und dem Wettbewerbsrecht."},
+      {q:"Ü 4.22: Muss ein Kredit, den ein Prokurist trotz internem Verbot aufgenommen hat, vom Unternehmen zurückgezahlt werden?", a:"Ja, da die Beschränkung der Prokura gegenüber der Bank (Dritten) unwirksam ist."},
+      {q:"K 4.1: Wer veranlasst die Eintragungen im Firmenbuch?", a:"Das Unternehmen bzw. dessen vertretungsbefugte Organe durch einen entsprechenden Antrag."},
+      {q:"Welche Rechtsform hat eine „GmbH"?", a:"Gesellschaft mit beschränkter Haftung (Kapitalgesellschaft)."},
+      {q:"Wer haftet bei einer OG (Offene Gesellschaft) für die Schulden?", a:"Die Gesellschafter haften persönlich, unbeschränkt und solidarisch auch mit ihrem Privatvermögen."},
+      {q:"Welches Mindeststammkapital ist für die Gründung einer GmbH erforderlich?", a:"Grundsätzlich 35.000 € (davon müssen bei der Gründung mindestens 17.500 € eingezahlt sein; beachte auch gründungsprivilegierte GmbH)."},
     ]
   }
 };
 
-let activeSet, allCards, deck, againCards, current, knowCount, againCount, flipped, mode;
+// ── STATE ──────────────────────────────────────────────────────────────
+let SET, allCards, deck, again, cur, knows, nopes, isFlipped, mode;
 
+// ── HELPERS ────────────────────────────────────────────────────────────
 function shuffle(arr) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+  for (let i = a.length-1; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
   }
   return a;
 }
 
+function show(id)  { document.getElementById(id).classList.remove('hidden'); }
+function hide(id)  { document.getElementById(id).classList.add('hidden'); }
+
+// ── SCREENS ────────────────────────────────────────────────────────────
+function goHome() {
+  show('home'); hide('quiz'); hide('done');
+}
+
 function startSet(n) {
-  activeSet = SETS[n];
-  allCards  = activeSet.cards;
-  againCards = []; knowCount = 0; againCount = 0; current = 0; mode = 'all';
+  SET = DATA[n];
+  allCards = SET.cards;
+  again = []; knows = 0; nopes = 0; cur = 0; mode = 'all';
   deck = shuffle([...allCards]);
 
   // Apply theme
-  const wrap = document.querySelector('.card-wrap');
-  wrap.className = 'card-wrap ' + activeSet.theme;
+  const th = SET.th;
+  document.getElementById('qlabel').textContent = SET.label;
+  document.getElementById('qlabel').className   = 'qlabel ' + (th==='t' ? 'teal' : 'amber');
+  document.getElementById('qtitle').textContent = SET.title;
+  document.getElementById('pfill').className    = 'pfill ' + th;
+  document.getElementById('dRestart').className = 'dbtn ' + (th==='t' ? 'pt' : 'pa');
 
-  document.getElementById('qLabel').textContent  = activeSet.label;
-  document.getElementById('qLabel').className    = 'qheader-label ' + activeSet.labelClass;
-  document.getElementById('qTitle').textContent  = activeSet.title;
-  document.getElementById('progFill').className  = 'prog-fill ' + activeSet.progClass;
-  document.getElementById('btnRestart').className = 'abtn ' + activeSet.btnClass;
+  // Card theme
+  document.getElementById('front').className = 'face front ' + th;
+  document.getElementById('back').className  = 'face back '  + th;
+  document.getElementById('flbl').className  = 'clabel ' + th;
+  document.getElementById('blbl').className  = 'clabel ' + th;
 
   updateModeBtns();
-  showQuiz();
+  hide('home'); hide('done'); show('quiz');
   loadCard();
 }
 
-function showQuiz() {
-  document.getElementById('homeScreen').style.display = 'none';
-  const q = document.getElementById('quizScreen');
-  q.style.display = 'flex';
-  document.getElementById('doneScreen').classList.remove('show');
-  document.getElementById('cardScene').style.display = '';
-  document.querySelector('.actions').style.display = '';
-  document.querySelector('.kb-hint').style.display = '';
-  document.querySelector('.prog-wrap').style.display = '';
-  document.querySelector('.mode-bar').style.display = '';
-}
-
-function goHome() {
-  document.getElementById('homeScreen').style.display = 'flex';
-  document.getElementById('quizScreen').style.display = 'none';
-}
-
+// ── QUIZ LOGIC ─────────────────────────────────────────────────────────
 function updateModeBtns() {
-  const ac = activeSet.modeActive;
-  document.getElementById('mbAll').className   = 'mbtn' + (mode === 'all'   ? ' ' + ac : '');
-  document.getElementById('mbAgain').className = 'mbtn' + (mode === 'again' ? ' ' + ac : '');
-  document.getElementById('mbAll').textContent   = `🃏 Alle (${allCards.length})`;
-  document.getElementById('mbAgain').textContent = `🔁 Nochmal (${againCards.length})`;
+  const ac = SET.th === 't' ? 'at' : 'aa';
+  document.getElementById('mbAll').className   = 'mbtn' + (mode==='all'   ? ' '+ac : '');
+  document.getElementById('mbAgain').className = 'mbtn' + (mode==='again' ? ' '+ac : '');
+  document.getElementById('mbAll').textContent   = '🃏 Alle (' + allCards.length + ')';
+  document.getElementById('mbAgain').textContent = '🔁 Nochmal (' + again.length + ')';
 }
-
-function setMode(m) { mode = m; updateModeBtns(); }
 
 function loadCard() {
-  const card = deck[current];
-  document.getElementById('frontTxt').textContent = card.q;
-  document.getElementById('backTxt').textContent  = card.a;
-  document.getElementById('cardInner').classList.remove('flipped');
-  document.getElementById('ansBtns').classList.remove('show');
-  flipped = false;
+  const c = deck[cur];
+  document.getElementById('ftxt').textContent = c.q;
+  document.getElementById('btxt').textContent = c.a;
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('abts').classList.remove('show');
+  isFlipped = false;
 
-  const sc = document.getElementById('cardScene');
-  sc.style.animation = 'none'; sc.offsetHeight; sc.style.animation = 'cardIn 0.3s ease';
-
-  const done = knowCount + againCount;
+  const done  = knows + nopes;
   const total = allCards.length;
-  const pct = Math.round((done / total) * 100);
-  document.getElementById('stTotal').textContent   = deck.length;
-  document.getElementById('stCurrent').textContent = current + 1;
-  document.getElementById('stKnow').textContent    = knowCount;
-  document.getElementById('stAgain').textContent   = againCount;
-  document.getElementById('progFill').style.width  = pct + '%';
-  document.getElementById('progLeft').textContent  = `${done} / ${total} erledigt`;
-  document.getElementById('progPct').textContent   = pct + '%';
+  const pct   = total ? Math.round(done/total*100) : 0;
+
+  document.getElementById('stTotal').textContent = deck.length;
+  document.getElementById('stCur').textContent   = cur + 1;
+  document.getElementById('stKnow').textContent  = knows;
+  document.getElementById('stAgain').textContent = nopes;
+  document.getElementById('pfill').style.width   = pct + '%';
+  document.getElementById('pleft').textContent   = done + ' / ' + total + ' erledigt';
+  document.getElementById('ppct').textContent    = pct + '%';
   updateModeBtns();
 }
 
-function flipCard() {
-  flipped = !flipped;
-  document.getElementById('cardInner').classList.toggle('flipped', flipped);
-  document.getElementById('ansBtns').classList.toggle('show', flipped);
+function flip() {
+  isFlipped = !isFlipped;
+  document.getElementById('card').classList.toggle('flipped', isFlipped);
+  document.getElementById('abts').classList.toggle('show', isFlipped);
 }
 
 function answer(knew) {
-  if (!flipped) { flipCard(); return; }
-  if (knew) { knowCount++; }
+  if (!isFlipped) { flip(); return; }
+  if (knew) { knows++; }
   else {
-    againCount++;
-    if (!againCards.find(c => c.q === deck[current].q)) againCards.push(deck[current]);
+    nopes++;
+    if (!again.find(c => c.q === deck[cur].q)) again.push(deck[cur]);
   }
-  current++;
-  if (current >= deck.length) showDone(); else loadCard();
+  cur++;
+  if (cur >= deck.length) showDone(); else loadCard();
 }
 
 function showDone() {
-  document.getElementById('cardScene').style.display = 'none';
-  document.querySelector('.actions').style.display = 'none';
-  document.querySelector('.kb-hint').style.display = 'none';
-  document.querySelector('.prog-wrap').style.display = 'none';
-  document.querySelector('.mode-bar').style.display = 'none';
+  hide('quiz'); show('done');
+  document.getElementById('dKnow').textContent  = knows;
+  document.getElementById('dAgain').textContent = nopes;
+  const pct = allCards.length ? Math.round(knows/allCards.length*100) : 0;
+  document.getElementById('dmsg').textContent =
+    pct===100 ? '🏆 Perfekt! Du kennst alle Karten!' :
+    pct>=80   ? 'Stark! '+pct+'% gewusst. Fast geschafft!' :
+    pct>=50   ? pct+'% gewusst – du bist auf dem richtigen Weg!' :
+                pct+'% gewusst – wiederhole die Nochmal-Karten!';
+  document.getElementById('dAgainOnly').style.display = again.length ? '' : 'none';
+}
 
-  document.getElementById('dKnow').textContent  = knowCount;
-  document.getElementById('dAgain').textContent = againCount;
-
-  const pct = Math.round((knowCount / allCards.length) * 100);
-  document.getElementById('doneMsg').textContent =
-    pct === 100 ? '🏆 Perfekt! Du kennst alle Karten!' :
-    pct >= 80   ? `Stark! ${pct}% gewusst. Fast geschafft!` :
-    pct >= 50   ? `${pct}% gewusst – du bist auf dem richtigen Weg!` :
-                  `${pct}% gewusst – wiederhole die Nochmal-Karten. Du schaffst das!`;
-
-  document.getElementById('btnOnlyAgain').style.display = againCards.length > 0 ? '' : 'none';
-  document.getElementById('doneScreen').classList.add('show');
+function restart(onlyAgain) {
+  knows = 0; nopes = 0; cur = 0;
+  if (onlyAgain && again.length) {
+    deck = shuffle([...again]);
+    again = [];
+  } else {
+    deck = shuffle([...allCards]);
+    again = [];
+    mode = 'all';
+  }
   updateModeBtns();
+  hide('done'); show('quiz');
+  loadCard();
 }
 
-function restart() {
-  knowCount = 0; againCount = 0; current = 0;
-  deck = shuffle([...allCards]); againCards = []; setMode('all');
-  showQuiz(); loadCard();
-}
-
-function restartAgain() {
-  if (!againCards.length) return;
-  knowCount = 0; againCount = 0; current = 0;
-  deck = shuffle([...againCards]); againCards = [];
-  showQuiz(); loadCard();
-}
-
-// Set card event listeners - robust for mobile
-document.getElementById('setCard1').addEventListener('click', function(e) { e.preventDefault(); startSet(1); });
-document.getElementById('setCard2').addEventListener('click', function(e) { e.preventDefault(); startSet(2); });
-document.getElementById('setCard1').addEventListener('touchend', function(e) { e.preventDefault(); startSet(1); });
-document.getElementById('setCard2').addEventListener('touchend', function(e) { e.preventDefault(); startSet(2); });
+// ── EVENT LISTENERS ────────────────────────────────────────────────────
+document.getElementById('btn1').addEventListener('click', function() { startSet(1); });
+document.getElementById('btn2').addEventListener('click', function() { startSet(2); });
+document.getElementById('backBtn').addEventListener('click', goHome);
+document.getElementById('flipBtn').addEventListener('click', flip);
+document.getElementById('noBtn').addEventListener('click',  function() { answer(false); });
+document.getElementById('yesBtn').addEventListener('click', function() { answer(true); });
+document.getElementById('card').addEventListener('click', flip);
+document.getElementById('mbAll').addEventListener('click',   function() { mode='all';   updateModeBtns(); });
+document.getElementById('mbAgain').addEventListener('click', function() { mode='again'; updateModeBtns(); });
+document.getElementById('dRestart').addEventListener('click',   function() { restart(false); });
+document.getElementById('dAgainOnly').addEventListener('click', function() { restart(true); });
+document.getElementById('dHome').addEventListener('click', goHome);
 
 // Keyboard
-document.addEventListener('keydown', e => {
-  if (document.getElementById('quizScreen').style.display === 'none') return;
-  if (document.getElementById('doneScreen').classList.contains('show')) return;
-  if (e.code === 'Space')       { e.preventDefault(); flipCard(); }
-  else if (e.code === 'ArrowLeft'  && flipped) answer(false);
-  else if (e.code === 'ArrowRight' && flipped) answer(true);
-  else if (e.code === 'Escape') goHome();
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('quiz').classList.contains('hidden')) {
+    if (e.code === 'Space')       { e.preventDefault(); flip(); }
+    else if (e.code === 'ArrowLeft'  && isFlipped) answer(false);
+    else if (e.code === 'ArrowRight' && isFlipped) answer(true);
+    else if (e.code === 'Escape') goHome();
+  }
 });
 
-// Touch swipe
-let tx = 0;
-document.getElementById('cardScene').addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
-document.getElementById('cardScene').addEventListener('touchend',   e => {
-  const dx = e.changedTouches[0].clientX - tx;
-  if (Math.abs(dx) > 60 && flipped) answer(dx > 0);
-  else if (Math.abs(dx) < 10) flipCard();
+// Touch swipe on card
+var tx0 = 0;
+document.getElementById('card').addEventListener('touchstart', function(e) {
+  tx0 = e.changedTouches[0].clientX;
+}, { passive: true });
+document.getElementById('card').addEventListener('touchend', function(e) {
+  var dx = e.changedTouches[0].clientX - tx0;
+  if (Math.abs(dx) > 55 && isFlipped) answer(dx > 0);
 }, { passive: true });
 </script>
 </body>
