@@ -138,8 +138,10 @@
     border: 1px solid rgba(251,191,36,0.2);
     border-radius: 8px; font-size: 12px; color: var(--amber);
   }
-  .set-arrow { position: absolute; right: 22px; bottom: 22px; font-size: 20px; opacity: 0.25; transition: all 0.2s; }
+  .set-arrow { position: absolute; right: 22px; bottom: 22px; font-size: 20px; opacity: 0.25; transition: all 0.2s; pointer-events: none; }
   .set-card:hover .set-arrow { opacity: 1; transform: translateX(4px); }
+  .set-card * { pointer-events: none; }
+  .set-card { pointer-events: all; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -303,7 +305,7 @@
   <p class="home-sub">Wähle ein Set zum Lernen</p>
 
   <div class="set-cards">
-    <div class="set-card s1" onclick="startSet(1)">
+    <div class="set-card s1" id="setCard1">
       <div class="set-card-top">
         <div>
           <div class="set-badge">Set 1 · Empfohlen</div>
@@ -323,7 +325,7 @@
       <div class="set-arrow">→</div>
     </div>
 
-    <div class="set-card s2" onclick="startSet(2)">
+    <div class="set-card s2" id="setCard2">
       <div class="set-card-top">
         <div>
           <div class="set-badge">Set 2 · Erweitert</div>
@@ -655,6 +657,12 @@ function restartAgain() {
   deck = shuffle([...againCards]); againCards = [];
   showQuiz(); loadCard();
 }
+
+// Set card event listeners - robust for mobile
+document.getElementById('setCard1').addEventListener('click', function(e) { e.preventDefault(); startSet(1); });
+document.getElementById('setCard2').addEventListener('click', function(e) { e.preventDefault(); startSet(2); });
+document.getElementById('setCard1').addEventListener('touchend', function(e) { e.preventDefault(); startSet(1); });
+document.getElementById('setCard2').addEventListener('touchend', function(e) { e.preventDefault(); startSet(2); });
 
 // Keyboard
 document.addEventListener('keydown', e => {
