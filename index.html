@@ -2,456 +2,586 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Wirtschaftsrecht – Karteikarten</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unternehmensrecht UGB — Karteikarten</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --bg: #0d1117;
-  --surf: #161b24;
-  --surf2: #1e2636;
-  --border: #1e4a6e;
-  --teal: #0ea5c9;
-  --cyan: #67e8f9;
-  --teal-glow: rgba(14,165,201,0.2);
-  --amber: #fbbf24;
-  --amber-glow: rgba(251,191,36,0.15);
-  --green: #34d399;
-  --green-bg: #052e16;
-  --red: #f87171;
-  --red-bg: #450a0a;
-  --text: #e2e8f0;
-  --muted: #8899aa;
-  --dim: #4a5568;
-  --r: 14px;
-}
+  :root {
+    --bg: #0f0f13;
+    --bg2: #16161d;
+    --bg3: #1e1e28;
+    --text: #e8e8f0;
+    --text2: #9898b0;
+    --text3: #5a5a72;
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 60px;
-}
+    --blue-dark: #042C53;
+    --blue-mid: #185FA5;
+    --blue-light: #378ADD;
+    --blue-pale: #85B7EB;
+    --blue-ghost: #0d1e30;
 
-/* ─── SCREENS ─── */
-.screen { width: 100%; max-width: 580px; padding: 0 16px; }
-.hidden { display: none !important; }
+    --teal-dark: #04342C;
+    --teal-mid: #0F6E56;
+    --teal-light: #1D9E75;
+    --teal-pale: #5DCAA5;
+    --teal-ghost: #081c17;
 
-/* ─── HOME ─── */
-#home { padding-top: 48px; }
+    --amber-dark: #412402;
+    --amber-mid: #854F0B;
+    --amber-light: #BA7517;
+    --amber-pale: #EF9F27;
+    --amber-ghost: #1e1205;
 
-.eyebrow {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--teal); text-align: center; margin-bottom: 8px;
-}
+    --gold-dark: #633806;
+    --gold-mid: #854F0B;
+    --gold-light: #d4900a;
+    --gold-pale: #FAC775;
+    --gold-ghost: #1f1508;
+  }
 
-.home-h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: 28px; font-weight: 800;
-  text-align: center; line-height: 1.2; margin-bottom: 6px;
-}
-.home-h1 em { color: var(--teal); font-style: normal; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    padding: 0;
+  }
 
-.home-sub { color: var(--muted); font-size: 14px; text-align: center; margin-bottom: 36px; }
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid #ffffff12;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-/* Set cards */
-.set-btn {
-  display: block;
-  width: 100%;
-  background: var(--surf);
-  border: 2px solid var(--border);
-  border-radius: var(--r);
-  padding: 22px;
-  margin-bottom: 14px;
-  cursor: pointer;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
-  /* reset button styles */
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  appearance: none;
-  -webkit-appearance: none;
-}
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
 
-.set-btn:active { transform: scale(0.98); }
+  header span {
+    font-size: 0.75rem;
+    color: var(--text2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
-.set-btn.s1 { border-top: 3px solid var(--teal); }
-.set-btn.s1:hover { border-color: var(--teal); box-shadow: 0 8px 28px var(--teal-glow); }
+  .set-tabs {
+    display: flex;
+    gap: 0;
+    padding: 2rem 2rem 0;
+    border-bottom: 1px solid #ffffff10;
+  }
 
-.set-btn.s2 { border-top: 3px solid var(--amber); }
-.set-btn.s2:hover { border-color: var(--amber); box-shadow: 0 8px 28px var(--amber-glow); }
+  .tab-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text2);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
 
-.set-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .tab-btn.active-blue {
+    color: var(--blue-pale);
+    border-bottom-color: var(--blue-light);
+  }
 
-.set-badge {
-  display: inline-block;
-  font-family: 'Syne', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
-}
-.s1 .set-badge { background: rgba(14,165,201,0.13); color: var(--teal); }
-.s2 .set-badge { background: rgba(251,191,36,0.13); color: var(--amber); }
+  .tab-btn.active-amber {
+    color: var(--amber-pale);
+    border-bottom-color: var(--amber-light);
+  }
 
-.set-count { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; line-height: 1; }
-.s1 .set-count { color: var(--teal); }
-.s2 .set-count { color: var(--amber); }
-.set-count span { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+  .tab-btn:hover {
+    color: var(--text);
+  }
 
-.set-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 5px; }
-.set-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+  .set-panel {
+    display: none;
+    padding: 2rem;
+  }
 
-.tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--surf2); color: var(--muted); border: 1px solid var(--border); }
+  .set-panel.active {
+    display: block;
+  }
 
-.warn {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 10px; padding: 7px 10px;
-  background: rgba(251,191,36,0.07);
-  border: 1px solid rgba(251,191,36,0.25);
-  border-radius: 8px; font-size: 12px; color: var(--amber);
-}
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 
-.arrow { position: absolute; right: 18px; bottom: 18px; font-size: 18px; opacity: 0.2; }
+  .progress-info {
+    font-size: 0.8rem;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
 
-/* ─── QUIZ ─── */
-#quiz { padding-top: 24px; }
+  .progress-bar-wrap {
+    height: 2px;
+    background: #ffffff10;
+    border-radius: 2px;
+    flex: 1;
+    min-width: 120px;
+    max-width: 220px;
+  }
 
-.qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
 
-.back {
-  background: var(--surf); border: 1px solid var(--border);
-  border-radius: 10px; color: var(--muted);
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 18px; flex-shrink: 0;
-  transition: all 0.2s;
-  /* reset */
-  font-family: inherit; appearance: none; -webkit-appearance: none;
-}
-.back:hover { border-color: var(--teal); color: var(--teal); }
+  .blue .progress-bar-fill { background: var(--blue-light); }
+  .amber .progress-bar-fill { background: var(--amber-light); }
 
-.qhead-text { flex: 1; }
-.qlabel { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-.qtitle { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; }
-.teal { color: var(--teal); }
-.amber { color: var(--amber); }
+  .nav-btns {
+    display: flex;
+    gap: 0.5rem;
+  }
 
-/* Stats row */
-.stats {
-  display: flex; gap: 0;
-  background: var(--surf); border: 1px solid var(--border);
-  border-radius: 12px; overflow: hidden; margin-bottom: 14px;
-}
-.stat { flex: 1; text-align: center; padding: 10px 4px; }
-.stat + .stat { border-left: 1px solid var(--border); }
-.sn { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
-.sn.t { color: var(--teal); }
-.sn.g { color: var(--green); }
-.sn.r { color: var(--red); }
-.sl { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .nav-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: transparent;
+  }
 
-/* Progress */
-.pbar-wrap { margin-bottom: 10px; }
-.pbar { height: 4px; background: var(--surf2); border-radius: 2px; overflow: hidden; margin-bottom: 5px; }
-.pfill { height: 100%; border-radius: 2px; transition: width 0.4s ease; width: 0%; }
-.pfill.t { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
-.pfill.a { background: linear-gradient(90deg, var(--amber), #f59e0b); }
-.plabels { display: flex; justify-content: space-between; font-size: 11px; color: var(--dim); }
+  .blue .nav-btn {
+    color: var(--blue-pale);
+    border-color: var(--blue-mid);
+  }
 
-/* Mode buttons */
-.modes { display: flex; gap: 8px; margin-bottom: 16px; }
-.mbtn {
-  flex: 1; padding: 8px; border-radius: 8px;
-  border: 1px solid var(--border); background: var(--surf);
-  color: var(--muted); font-family: 'DM Sans', sans-serif;
-  font-size: 12px; cursor: pointer; transition: all 0.2s;
-  appearance: none; -webkit-appearance: none;
-}
-.mbtn.at { background: var(--surf2); border-color: var(--teal); color: var(--teal); }
-.mbtn.aa { background: var(--surf2); border-color: var(--amber); color: var(--amber); }
+  .blue .nav-btn:hover {
+    background: var(--blue-ghost);
+    border-color: var(--blue-light);
+  }
 
-/* Flashcard */
-.card-area { perspective: 1000px; margin-bottom: 14px; }
+  .amber .nav-btn {
+    color: var(--amber-pale);
+    border-color: var(--amber-mid);
+  }
 
-.card {
-  width: 100%; height: 300px;
-  position: relative; transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  cursor: pointer;
-}
-.card.flipped { transform: rotateY(180deg); }
+  .amber .nav-btn:hover {
+    background: var(--amber-ghost);
+    border-color: var(--amber-light);
+  }
 
-.face {
-  position: absolute; inset: 0;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  border-radius: var(--r);
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  padding: 28px 22px; text-align: center;
-}
+  .card-stage {
+    perspective: 1200px;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    cursor: pointer;
+  }
 
-.front {
-  background: var(--surf);
-  border-bottom: 3px solid transparent;
-}
-.front.t { border: 1.5px solid var(--border); border-top: 3px solid var(--teal); }
-.front.a { border: 1.5px solid #3a2e1a;   border-top: 3px solid var(--amber); }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-.back { transform: rotateY(180deg); }
-.back.t { background: var(--surf2); border: 1.5px solid rgba(14,165,201,0.35); border-top: 3px solid var(--cyan); }
-.back.a { background: var(--surf2); border: 1.5px solid rgba(251,191,36,0.35); border-top: 3px solid var(--amber); }
+  .card-inner.flipped {
+    transform: rotateY(180deg);
+  }
 
-.clabel {
-  font-family: 'Syne', sans-serif;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  margin-bottom: 16px;
-  display: flex; align-items: center; gap: 8px;
-}
-.clabel::before, .clabel::after { content: ''; flex: 1; max-width: 24px; height: 1px; background: var(--border); }
-.clabel.t { color: var(--teal); }
-.clabel.a { color: var(--amber); }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    min-height: 320px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
 
-.ctext { font-size: 17px; font-weight: 500; line-height: 1.6; color: var(--text); white-space: pre-line; }
-.back .ctext { font-size: 15px; font-weight: 400; color: #c8dff0; }
+  .card-back {
+    transform: rotateY(180deg);
+  }
 
-.chint { position: absolute; bottom: 14px; font-size: 11px; color: var(--dim); }
+  .blue .card-face.card-front {
+    background: linear-gradient(145deg, #0d1e30 0%, #0a1824 100%);
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 0 0 1px #185FA520, inset 0 1px 0 #ffffff08;
+  }
 
-/* Action buttons */
-.btns { display: flex; gap: 10px; margin-bottom: 10px; }
+  .blue .card-face.card-back {
+    background: linear-gradient(145deg, #081c17 0%, #061512 100%);
+    border: 1px solid var(--teal-mid);
+    box-shadow: 0 0 0 1px #1D9E7520, inset 0 1px 0 #ffffff08;
+  }
 
-.btn {
-  flex: 1; padding: 13px;
-  border: none; border-radius: 12px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px; font-weight: 500;
-  cursor: pointer; transition: all 0.18s;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  appearance: none; -webkit-appearance: none;
-}
-.btn:active { transform: scale(0.96); }
+  .amber .card-face.card-front {
+    background: linear-gradient(145deg, #1e1205 0%, #180f04 100%);
+    border: 1px solid var(--amber-mid);
+    box-shadow: 0 0 0 1px #BA751720, inset 0 1px 0 #ffffff08;
+  }
 
-.bflip { background: var(--surf); color: var(--teal); border: 1px solid var(--border); flex: 0.55; }
-.bno   { background: var(--red-bg);   color: var(--red);   border: 1px solid rgba(248,113,113,0.2); }
-.byes  { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+  .amber .card-face.card-back {
+    background: linear-gradient(145deg, #1f1508 0%, #190f05 100%);
+    border: 1px solid var(--gold-mid);
+    box-shadow: 0 0 0 1px #d4900a20, inset 0 1px 0 #ffffff08;
+  }
 
-.abts { display: flex; gap: 10px; flex: 1; }
-.abts .btn { opacity: 0; pointer-events: none; transition: opacity 0.25s; }
-.abts.show .btn { opacity: 1; pointer-events: all; }
+  .card-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.kbhint { display: flex; gap: 14px; justify-content: center; font-size: 10px; color: var(--dim); }
-kbd { background: var(--surf2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 10px; color: var(--muted); }
+  .card-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+  }
 
-/* Done */
-#done {
-  padding-top: 32px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; gap: 14px;
-}
-.done-icon { font-size: 50px; }
-.done-h { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
-.score { display: flex; gap: 24px; background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 14px 26px; }
-.sc { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.scn { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; }
-.scn.g { color: var(--green); } .scn.r { color: var(--red); }
-.scl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.done-msg { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 320px; }
+  .blue .card-front .card-label { color: var(--blue-pale); }
+  .blue .card-front .card-label::before { background: var(--blue-pale); }
+  .blue .card-back .card-label { color: var(--teal-pale); }
+  .blue .card-back .card-label::before { background: var(--teal-pale); }
 
-.dbtn {
-  width: 100%; max-width: 340px; padding: 14px;
-  border-radius: 12px; border: none;
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s; text-align: center;
-  appearance: none; -webkit-appearance: none;
-}
-.dbtn:active { transform: scale(0.97); }
-.dbtn.pt { background: linear-gradient(135deg, #0b7da0, var(--teal)); color: #fff; box-shadow: 0 4px 20px rgba(14,165,201,0.3); }
-.dbtn.pa { background: linear-gradient(135deg, #b45309, var(--amber)); color: #1a0e00; box-shadow: 0 4px 20px rgba(251,191,36,0.25); }
-.dbtn.sec { background: var(--surf); color: var(--muted); border: 1px solid var(--border); }
-.dbtn.hm  { background: var(--surf); color: var(--muted); border: 1px solid var(--border); }
+  .amber .card-front .card-label { color: var(--amber-pale); }
+  .amber .card-front .card-label::before { background: var(--amber-pale); }
+  .amber .card-back .card-label { color: var(--gold-pale); }
+  .amber .card-back .card-label::before { background: var(--gold-pale); }
 
-@media (max-width: 420px) {
-  .home-h1 { font-size: 24px; }
-  .ctext { font-size: 15px; }
-  .back .ctext { font-size: 13px; }
-  .card { height: 270px; }
-  .kbhint { display: none; }
-}
+  .card-question {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text);
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-answer {
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text);
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-hint {
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .rating-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .rate-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: transparent;
+  }
+
+  .rate-btn.correct {
+    color: #5DCAA5;
+    border-color: #0F6E5680;
+  }
+
+  .rate-btn.correct:hover { background: #04342C; }
+
+  .rate-btn.wrong {
+    color: #f09595;
+    border-color: #a32d2d80;
+  }
+
+  .rate-btn.wrong:hover { background: #500a0a; }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+    gap: 5px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .mini-dot {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    border: 1px solid #ffffff10;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: var(--bg3);
+    font-size: 0.55rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text3);
+  }
+
+  .mini-dot:hover { border-color: #ffffff30; }
+
+  .blue .mini-dot.current { border-color: var(--blue-light); background: var(--blue-ghost); color: var(--blue-pale); }
+  .blue .mini-dot.correct { background: #04342C; border-color: var(--teal-mid); color: var(--teal-pale); }
+  .blue .mini-dot.wrong { background: #1a0a0a; border-color: #a32d2d; color: #f09595; }
+
+  .amber .mini-dot.current { border-color: var(--amber-light); background: var(--amber-ghost); color: var(--amber-pale); }
+  .amber .mini-dot.correct { background: #04342C; border-color: var(--teal-mid); color: var(--teal-pale); }
+  .amber .mini-dot.wrong { background: #1a0a0a; border-color: #a32d2d; color: #f09595; }
+
+  .shuffle-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #ffffff15;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text2);
+    transition: all 0.15s ease;
+  }
+
+  .shuffle-btn:hover { background: var(--bg3); color: var(--text); border-color: #ffffff25; }
+
+  .summary-box {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #ffffff10;
+    background: var(--bg2);
+  }
+
+  .summary-box h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .summary-box p { color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  .restart-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.15s ease;
+  }
+
+  .blue .restart-btn { color: var(--blue-pale); border-color: var(--blue-mid); }
+  .blue .restart-btn:hover { background: var(--blue-ghost); }
+  .amber .restart-btn { color: var(--amber-pale); border-color: var(--amber-mid); }
+  .amber .restart-btn:hover { background: var(--amber-ghost); }
+
+  @media (max-width: 600px) {
+    header { padding: 1rem; }
+    .set-tabs { padding: 1rem 1rem 0; }
+    .set-panel { padding: 1rem; }
+    .card-face { padding: 1.5rem; min-height: 260px; }
+    .card-inner { min-height: 260px; }
+    .card-question { font-size: 1rem; }
+    .card-answer { font-size: 0.9rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- HOME -->
-<div id="home" class="screen">
-  <div class="eyebrow">Kapitel 4 · Zivilrecht für Unternehmen</div>
-  <h1 class="home-h1">Wirtschafts<em>recht</em><br>Karteikarten</h1>
-  <p class="home-sub">Wähle ein Set zum Lernen</p>
+<header>
+  <h1>Unternehmensrecht UGB</h1>
+  <span>Karteikarten · Wirtschaft</span>
+</header>
 
-  <button class="set-btn s1" id="btn1" type="button">
-    <div class="set-top">
-      <div>
-        <div class="set-badge">Set 1 · Empfohlen</div>
-        <div class="set-name">Kernkonzepte Unternehmensrecht</div>
-      </div>
-      <div class="set-count">20<span>Karten</span></div>
-    </div>
-    <div class="set-desc">Grundlegende Themen: UGB, Firmenbuch, Vollmachten, Prokura, Firmennamen und Vermittler.</div>
-    <div class="tags">
-      <span class="tag">UGB & Unternehmer</span>
-      <span class="tag">Firmenbuch</span>
-      <span class="tag">Prokura</span>
-      <span class="tag">Handlungsvollmacht</span>
-      <span class="tag">Firmenrecht</span>
-      <span class="tag">Makler & Kommission</span>
-    </div>
-    <div class="arrow">→</div>
-  </button>
-
-  <button class="set-btn s2" id="btn2" type="button">
-    <div class="set-top">
-      <div>
-        <div class="set-badge">Set 2 · Erweitert</div>
-        <div class="set-name">Vertiefung & Übungsaufgaben</div>
-      </div>
-      <div class="set-count">43<span>Karten</span></div>
-    </div>
-    <div class="set-desc">Detailliertere Fragen inkl. Übungsaufgaben (Ü 4.x), Grenzfälle und Spezialthemen.</div>
-    <div class="tags">
-      <span class="tag">Filialprokura</span>
-      <span class="tag">Negative Publizität</span>
-      <span class="tag">Lagervollmacht</span>
-      <span class="tag">Übungsaufgaben</span>
-      <span class="tag">GmbH & OG</span>
-    </div>
-    <div class="warn">⚠️ Möglicherweise Fehler – Antworten kritisch prüfen!</div>
-    <div class="arrow">→</div>
-  </button>
+<div class="set-tabs">
+  <button class="tab-btn active-blue" onclick="switchSet('blue')">Set 1 · Ozean (20 Karten)</button>
+  <button class="tab-btn" onclick="switchSet('amber')">Set 2 · Ambra (42 Karten)</button>
 </div>
 
-<!-- QUIZ -->
-<div id="quiz" class="screen hidden">
-  <div class="qhead">
-    <button class="back" id="backBtn" type="button">←</button>
-    <div class="qhead-text">
-      <div class="qlabel" id="qlabel"></div>
-      <div class="qtitle" id="qtitle"></div>
+<div id="panel-blue" class="set-panel blue active">
+  <div class="controls">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span class="progress-info" id="b-progress">Karte 1 von 20</span>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="b-bar" style="width:5%"></div></div>
     </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="sn t" id="stTotal">0</div><div class="sl">Gesamt</div></div>
-    <div class="stat"><div class="sn t" id="stCur">1</div><div class="sl">Aktuell</div></div>
-    <div class="stat"><div class="sn g" id="stKnow">0</div><div class="sl">Kann ich ✓</div></div>
-    <div class="stat"><div class="sn r" id="stAgain">0</div><div class="sl">Nochmal ✗</div></div>
-  </div>
-
-  <div class="pbar-wrap">
-    <div class="pbar"><div class="pfill" id="pfill"></div></div>
-    <div class="plabels"><span id="pleft">0 / 0 erledigt</span><span id="ppct">0%</span></div>
-  </div>
-
-  <div class="modes">
-    <button class="mbtn" id="mbAll" type="button">🃏 Alle</button>
-    <button class="mbtn" id="mbAgain" type="button">🔁 Nochmal (0)</button>
-  </div>
-
-  <div class="card-area">
-    <div class="card" id="card">
-      <div class="face front" id="front">
-        <div class="clabel" id="flbl">Frage</div>
-        <div class="ctext" id="ftxt"></div>
-        <div class="chint">Tippe zum Umdrehen</div>
-      </div>
-      <div class="face back" id="back">
-        <div class="clabel" id="blbl">Antwort</div>
-        <div class="ctext" id="btxt"></div>
-        <div class="chint">Wähle unten</div>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="shuffle-btn" onclick="shuffle('b')">Mischen</button>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prev('b')">← Zurück</button>
+        <button class="nav-btn" onclick="next('b')">Weiter →</button>
       </div>
     </div>
   </div>
 
-  <div class="btns">
-    <button class="btn bflip" id="flipBtn" type="button">↩ Umdrehen</button>
-    <div class="abts" id="abts">
-      <button class="btn bno"  id="noBtn"  type="button">✗ Nochmal</button>
-      <button class="btn byes" id="yesBtn" type="button">✓ Kann ich!</button>
+  <div class="card-stage" onclick="flip('b')">
+    <div class="card-inner" id="b-card">
+      <div class="card-face card-front">
+        <div class="card-label">Frage</div>
+        <div class="card-question" id="b-q"></div>
+        <div class="card-hint">Klicken zum Umdrehen</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-label">Antwort</div>
+        <div class="card-answer" id="b-a"></div>
+        <div class="card-hint">Klicken zum Umdrehen</div>
+      </div>
     </div>
   </div>
 
-  <div class="kbhint">
-    <span class="kb-key"><kbd>Space</kbd> umdrehen</span>
-    <span class="kb-key"><kbd>←</kbd> Nochmal</span>
-    <span class="kb-key"><kbd>→</kbd> Kann ich!</span>
-    <span class="kb-key"><kbd>Esc</kbd> Zurück</span>
+  <div class="rating-row" id="b-rating">
+    <button class="rate-btn correct" onclick="rate('b','correct')">✓ Gewusst</button>
+    <button class="rate-btn wrong" onclick="rate('b','wrong')">✗ Noch nicht</button>
+  </div>
+
+  <div class="mini-grid blue" id="b-dots"></div>
+
+  <div class="summary-box" id="b-summary" style="display:none">
+    <h2 id="b-sum-title"></h2>
+    <p id="b-sum-text"></p>
+    <button class="restart-btn" onclick="restart('b')">Nochmal von vorne</button>
   </div>
 </div>
 
-<!-- DONE -->
-<div id="done" class="screen hidden">
-  <div class="done-icon">🎉</div>
-  <div class="done-h">Runde abgeschlossen!</div>
-  <div class="score">
-    <div class="sc"><div class="scn g" id="dKnow">0</div><div class="scl">Kann ich</div></div>
-    <div class="sc"><div class="scn r" id="dAgain">0</div><div class="scl">Nochmal</div></div>
+<div id="panel-amber" class="set-panel amber">
+  <div class="controls">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span class="progress-info" id="a-progress">Karte 1 von 42</span>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="a-bar" style="width:2%"></div></div>
+    </div>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="shuffle-btn" onclick="shuffle('a')">Mischen</button>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prev('a')">← Zurück</button>
+        <button class="nav-btn" onclick="next('a')">Weiter →</button>
+      </div>
+    </div>
   </div>
-  <div class="done-msg" id="dmsg"></div>
-  <button class="dbtn" id="dRestart" type="button">🔁 Alle Karten wiederholen</button>
-  <button class="dbtn sec" id="dAgainOnly" type="button">🎯 Nur Nochmal-Karten</button>
-  <button class="dbtn hm"  id="dHome"    type="button">🏠 Zurück zur Set-Auswahl</button>
+
+  <div class="card-stage" onclick="flip('a')">
+    <div class="card-inner" id="a-card">
+      <div class="card-face card-front">
+        <div class="card-label">Frage</div>
+        <div class="card-question" id="a-q"></div>
+        <div class="card-hint">Klicken zum Umdrehen</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-label">Antwort</div>
+        <div class="card-answer" id="a-a"></div>
+        <div class="card-hint">Klicken zum Umdrehen</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rating-row" id="a-rating">
+    <button class="rate-btn correct" onclick="rate('a','correct')">✓ Gewusst</button>
+    <button class="rate-btn wrong" onclick="rate('a','wrong')">✗ Noch nicht</button>
+  </div>
+
+  <div class="mini-grid amber" id="a-dots"></div>
+
+  <div class="summary-box" id="a-summary" style="display:none">
+    <h2 id="a-sum-title"></h2>
+    <p id="a-sum-text"></p>
+    <button class="restart-btn" onclick="restart('a')">Nochmal von vorne</button>
+  </div>
 </div>
 
 <script>
-'use strict';
-
-// ── DATA ──────────────────────────────────────────────────────────────
 const DATA = {
-  1: {
-    label: 'Set 1 · Empfohlen', title: 'Kernkonzepte',
-    th: 't',
+  b: {
     cards: [
       {q:"Ab wann gilt eine Tätigkeit als „unternehmerisch" im Sinne des UGB?", a:"Wenn sie selbstständig, auf Dauer angelegt, mit einer Organisation versehen ist und Leistungen gegen Entgelt am Markt anbietet."},
       {q:"Wer gilt als Unternehmer „kraft Rechtsform"?", a:"Bestimmte juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV."},
-      {q:"Richtig oder Falsch? Ein Sportverein, der seine Ausgaben ausschließlich durch Mitgliedsbeiträge deckt, ist Unternehmer im Sinne des UGB.", a:"❌ FALSCH. Er erbringt keine Leistungen gegen Entgelt am Markt, um seine Kosten zu decken."},
-      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Wirkung im Firmenbuch?", a:"Deklarativ: Die Rechtslage besteht bereits (z. B. Prokuraerteilung).\nKonstitutiv: Die Rechtslage entsteht erst durch die Eintragung (z. B. Gründung einer GmbH)."},
-      {q:"Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a:"✅ JA. Das Firmenbuch ist ein öffentliches Verzeichnis und gegen Gebühr für jedermann zugänglich."},
+      {q:"Richtig oder Falsch? Ein Sportverein, der seine Ausgaben ausschließlich durch Mitgliedsbeiträge deckt, ist Unternehmer im Sinne des UGB.", a:"Falsch. Er erbringt keine Leistungen gegen Entgelt am Markt, um seine Kosten zu decken."},
+      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Wirkung im Firmenbuch?", a:"Deklarativ bedeutet, eine Rechtslage besteht bereits (z. B. Prokuraerteilung); konstitutiv bedeutet, die Rechtslage entsteht erst durch die Eintragung (z. B. Gründung einer GmbH)."},
+      {q:"Darf jede Person ohne Angabe von Gründen Einsicht in das Firmenbuch nehmen?", a:"Ja, das Firmenbuch ist ein öffentliches Verzeichnis und gegen Gebühr für jedermann zugänglich."},
       {q:"Welchen zwingenden Firmenzusatz benötigt ein im Firmenbuch eingetragener Einzelunternehmer?", a:"Den Zusatz „e.U." (eingetragene Unternehmerin / eingetragener Unternehmer)."},
-      {q:"Darf ein Prokurist ohne spezielle Erlaubnis eine Hypothek auf ein Betriebsgrundstück aufnehmen?", a:"❌ NEIN. Zur Belastung (und zum Verkauf) von Grundstücken ist eine Spezialvollmacht erforderlich."},
-      {q:"Was bedeutet das Kürzel „ppa." vor einer Unterschrift?", a:"„per procura" – es kennzeichnet, dass die Person mit einer Prokura zeichnet."},
-      {q:"Richtig oder Falsch? Die Prokura kann auch schlüssig (durch bloßes Handeln) erteilt werden.", a:"❌ FALSCH. Die Prokura muss ausdrücklich (mündlich oder schriftlich) erteilt werden."},
-      {q:"Darf ein Generalhandlungsvollmächtigter für das Unternehmen eigenständig Kredite aufnehmen?", a:"❌ NEIN. Für die Aufnahme von Darlehen (Krediten) ist gesetzlich eine Spezialvollmacht vorgeschrieben."},
-      {q:"Wie muss ein Handlungsbevollmächtigter im Gegensatz zum Prokuristen unterschreiben?", a:"Mit einem Zusatz, der die Handlungsvollmacht andeutet: „i.V." (in Vertretung) oder „i.A." (im Auftrag)."},
-      {q:"Richtig oder Falsch? Eine Handlungsvollmacht kann im Gegensatz zur Prokura auch schlüssig erteilt werden.", a:"✅ RICHTIG."},
+      {q:"Darf ein Prokurist ohne spezielle Erlaubnis eine Hypothek auf ein Betriebsgrundstück aufnehmen?", a:"Nein, zur Belastung (und zum Verkauf) von Grundstücken ist eine Spezialvollmacht erforderlich."},
+      {q:"Was bedeutet das Kürzel „ppa." vor einer Unterschrift?", a:"„per procura"; es kennzeichnet, dass die Person mit einer Prokura zeichnet."},
+      {q:"Richtig oder Falsch? Die Prokura kann auch schlüssig (durch bloßes Handeln) erteilt werden.", a:"Falsch. Die Prokura muss ausdrücklich (mündlich oder schriftlich) erteilt werden."},
+      {q:"Darf ein Generalhandlungsvollmächtigter für das Unternehmen eigenständig Kredite aufnehmen?", a:"Nein, für die Aufnahme von Darlehen (Krediten) ist gesetzlich eine Spezialvollmacht vorgeschrieben."},
+      {q:"Wie muss ein Handlungsbevollmächtigter im Gegensatz zum Prokuristen unterschreiben?", a:"Mit einem Zusatz, der die Handlungsvollmacht andeutet, wie „i.V." (in Vertretung) oder „i.A." (im Auftrag)."},
+      {q:"Richtig oder Falsch? Eine Handlungsvollmacht kann im Gegensatz zur Prokura auch schlüssig erteilt werden.", a:"Richtig."},
       {q:"Was ist der entscheidende Unterschied zwischen einem Handelsvertreter und einem Makler?", a:"Der Handelsvertreter ist ständig mit der Vermittlung betraut; der Makler wird nur im Einzelfall (gelegentlich) tätig."},
-      {q:"Wer trägt das wirtschaftliche Risiko beim Kommissionsgeschäft?", a:"Der Kommittent – der Kommissionär handelt zwar im eigenen Namen, aber für fremde Rechnung."},
-      {q:"Richtig oder Falsch? Ein Spediteur ist eine Person, die den physischen Transport der Ware selbst durchführt.", a:"❌ FALSCH. Der Spediteur organisiert den Transport; die Person, die ihn durchführt, ist der Frachtführer."},
+      {q:"Wer trägt das wirtschaftliche Risiko beim Kommissionsgeschäft?", a:"Der Kommittent, da der Kommissionär zwar im eigenen Namen, aber für fremde Rechnung handelt."},
+      {q:"Richtig oder Falsch? Ein Spediteur ist eine Person, die den physischen Transport der Ware selbst durchführt.", a:"Falsch. Der Spediteur organisiert den Transport; die Person, die ihn durchführt, ist der Frachtführer."},
       {q:"Welcher Grundsatz besagt, dass eine neue Firma sich deutlich von bereits bestehenden Firmen am selben Ort unterscheiden muss?", a:"Der Grundsatz der Firmenausschließlichkeit."},
-      {q:"Darf ein Einzelunternehmen unter einer reinen Sachbezeichnung wie „Bäckerei" ohne weitere Zusätze geführt werden?", a:"❌ NEIN. Die Firma muss den Namen des Inhabers oder eine Fantasiebezeichnung mit dem Zusatz „e.U." enthalten."},
+      {q:"Darf ein Einzelunternehmen unter einer reinen Sachbezeichnung wie „Bäckerei" ohne weitere Zusätze geführt werden?", a:"Nein, die Firma muss den Namen des Inhabers oder eine Fantasiebezeichnung mit dem Zusatz „e.U." enthalten."},
       {q:"Was versteht man unter einer „Gesamtprokura"?", a:"Eine Prokura, die an mehrere Personen so erteilt wurde, dass sie nur gemeinsam zeichnungsberechtigt sind."},
-      {q:"Richtig oder Falsch? Ein Makler kann als Doppelmakler für beide Vertragsparteien tätig sein.", a:"✅ RICHTIG – er muss dabei jedoch die Interessen beider Parteien gleichermaßen wahren."},
-      {q:"Welche fünf Informationen müssen zwingend auf den Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmens stehen?", a:"1. Firma\n2. Rechtsform\n3. Sitz des Unternehmens\n4. Firmenbuchnummer\n5. Firmenbuchgericht"},
-    ]
+      {q:"Richtig oder Falsch? Ein Makler kann als Doppelmakler für beide Vertragsparteien tätig sein.", a:"Richtig, er muss dabei jedoch die Interessen beider Parteien gleichermaßen wahren."},
+      {q:"Welche fünf Informationen müssen zwingend auf den Geschäftspapieren eines im Firmenbuch eingetragenen Unternehmens stehen?", a:"Firma, Rechtsform, Sitz des Unternehmens, Firmenbuchnummer und das Firmenbuchgericht."}
+    ],
+    idx: 0, flipped: false, ratings: {}
   },
-  2: {
-    label: 'Set 2 · Erweitert', title: 'Vertiefung & Übungen',
-    th: 'a',
+  a: {
     cards: [
       {q:"Welche vier Merkmale definieren eine unternehmerische Tätigkeit?", a:"Selbstständigkeit, Dauerhaftigkeit, Organisation und Angebot von Leistungen gegen Entgelt am Markt."},
       {q:"Wer gilt als Unternehmer kraft Rechtsform?", a:"Juristische Personen wie AG, GmbH, OG, KG, Genossenschaften, Sparkassen und die EWIV."},
       {q:"Gilt ein Rechtsanwalt immer als Unternehmer im Sinne aller UGB-Vorschriften?", a:"Nein, für freie Berufe gelten nur die Regeln über unternehmensbezogene Geschäfte, es sei denn, sie sind kraft Rechtsform oder Eintragung Unternehmer."},
       {q:"Ü 4.2: Ist eine Druckerei ein Unternehmen im Sinne des UGB?", a:"Ja, da sie alle Merkmale einer unternehmerischen Tätigkeit erfüllt."},
       {q:"Ü 4.2: Ist ein Sportverein, der sich nur durch Mitgliedsbeiträge finanziert, ein Unternehmen im Sinne des UGB?", a:"Nein, da er keine Leistungen gegen Entgelt am Markt anbietet, um seine Kosten zu decken."},
-      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Eintragung im Firmenbuch?", a:"Deklarativ: Rechtslage besteht schon (z.B. Prokura).\nKonstitutiv: Rechtslage entsteht erst durch Eintragung (z.B. GmbH-Gründung)."},
+      {q:"Was ist der Unterschied zwischen deklarativer und konstitutiver Eintragung im Firmenbuch?", a:"Deklarativ: Rechtslage besteht schon (z.B. Prokura); Konstitutiv: Rechtslage entsteht erst durch Eintragung (z.B. GmbH-Gründung)."},
       {q:"Was besagt die negative Publizität des Firmenbuchs?", a:"Dass Tatsachen, die eingetragen und bekanntgemacht werden müssten, einem Dritten nicht entgegengehalten werden können, wenn sie nicht eingetragen sind."},
       {q:"Ü 4.4: Können sich Landwirtinnen in das Firmenbuch eintragen lassen?", a:"Richtig, sie können sich freiwillig eintragen lassen."},
       {q:"Ab welcher Umsatzschwelle müssen sich Einzelunternehmer zwingend ins Firmenbuch eintragen lassen?", a:"Wenn der Umsatz in zwei aufeinanderfolgenden Jahren jeweils 700.000 € übersteigt."},
@@ -488,166 +618,130 @@ const DATA = {
       {q:"K 4.1: Wer veranlasst die Eintragungen im Firmenbuch?", a:"Das Unternehmen bzw. dessen vertretungsbefugte Organe durch einen entsprechenden Antrag."},
       {q:"Welche Rechtsform hat eine „GmbH"?", a:"Gesellschaft mit beschränkter Haftung (Kapitalgesellschaft)."},
       {q:"Wer haftet bei einer OG (Offene Gesellschaft) für die Schulden?", a:"Die Gesellschafter haften persönlich, unbeschränkt und solidarisch auch mit ihrem Privatvermögen."},
-      {q:"Welches Mindeststammkapital ist für die Gründung einer GmbH erforderlich?", a:"Grundsätzlich 35.000 € (davon müssen bei der Gründung mindestens 17.500 € eingezahlt sein; beachte auch gründungsprivilegierte GmbH)."},
-    ]
+      {q:"Welches Mindeststammkapital ist für die Gründung einer GmbH erforderlich?", a:"Grundsätzlich 35.000 € (davon müssen bei der Gründung mindestens 17.500 € eingezahlt sein; beachte auch gründungsprivilegierte GmbH)."}
+    ],
+    idx: 0, flipped: false, ratings: {}
   }
 };
 
-// ── STATE ──────────────────────────────────────────────────────────────
-let SET, allCards, deck, again, cur, knows, nopes, isFlipped, mode;
+let activeSet = 'b';
+let tabBtns = document.querySelectorAll('.tab-btn');
 
-// ── HELPERS ────────────────────────────────────────────────────────────
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i>0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+function switchSet(set) {
+  activeSet = set;
+  document.getElementById('panel-blue').classList.toggle('active', set === 'b');
+  document.getElementById('panel-amber').classList.toggle('active', set === 'a');
+  tabBtns[0].classList.toggle('active-blue', set === 'b');
+  tabBtns[1].classList.toggle('active-amber', set === 'a');
+  render(set);
+}
+
+function render(s) {
+  const d = DATA[s];
+  const card = d.cards[d.idx];
+  document.getElementById(s+'-q').textContent = card.q;
+  document.getElementById(s+'-a').textContent = card.a;
+  const ci = document.getElementById(s+'-card');
+  ci.classList.remove('flipped');
+  d.flipped = false;
+  updateProgress(s);
+  renderDots(s);
+}
+
+function updateProgress(s) {
+  const d = DATA[s];
+  const total = d.cards.length;
+  const pct = Math.round(((d.idx+1)/total)*100);
+  document.getElementById(s+'-progress').textContent = `Karte ${d.idx+1} von ${total}`;
+  document.getElementById(s+'-bar').style.width = pct+'%';
+}
+
+function flip(s) {
+  const d = DATA[s];
+  d.flipped = !d.flipped;
+  document.getElementById(s+'-card').classList.toggle('flipped', d.flipped);
+}
+
+function next(s) {
+  const d = DATA[s];
+  if(d.idx < d.cards.length-1) { d.idx++; render(s); }
+  else { showSummary(s); }
+}
+
+function prev(s) {
+  const d = DATA[s];
+  if(d.idx > 0) { d.idx--; render(s); }
+}
+
+function rate(s, result) {
+  const d = DATA[s];
+  d.ratings[d.idx] = result;
+  renderDots(s);
+  if(d.idx < d.cards.length-1) { setTimeout(()=>{ d.idx++; render(s); }, 180); }
+  else { setTimeout(()=>showSummary(s), 300); }
+}
+
+function renderDots(s) {
+  const d = DATA[s];
+  const container = document.getElementById(s+'-dots');
+  container.innerHTML = '';
+  d.cards.forEach((c,i) => {
+    const dot = document.createElement('div');
+    dot.className = 'mini-dot';
+    dot.textContent = i+1;
+    if(i === d.idx) dot.classList.add('current');
+    if(d.ratings[i] === 'correct') dot.classList.add('correct');
+    if(d.ratings[i] === 'wrong') dot.classList.add('wrong');
+    dot.onclick = (e) => { e.stopPropagation(); d.idx=i; render(s); };
+    container.appendChild(dot);
+  });
+}
+
+function shuffle(s) {
+  const d = DATA[s];
+  for(let i=d.cards.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [d.cards[i],d.cards[j]]=[d.cards[j],d.cards[i]];
   }
-  return a;
+  d.idx=0; d.ratings={}; d.flipped=false;
+  document.getElementById(s+'-summary').style.display='none';
+  document.getElementById(s+'-card').style.display='';
+  document.getElementById(s+'-rating').style.display='';
+  document.getElementById(s+'-dots').style.display='';
+  render(s);
 }
 
-function show(id)  { document.getElementById(id).classList.remove('hidden'); }
-function hide(id)  { document.getElementById(id).classList.add('hidden'); }
-
-// ── SCREENS ────────────────────────────────────────────────────────────
-function goHome() {
-  show('home'); hide('quiz'); hide('done');
+function showSummary(s) {
+  const d = DATA[s];
+  const correct = Object.values(d.ratings).filter(r=>r==='correct').length;
+  const total = d.cards.length;
+  document.getElementById(s+'-card').style.display='none';
+  document.getElementById(s+'-rating').style.display='none';
+  document.getElementById(s+'-summary').style.display='block';
+  document.getElementById(s+'-sum-title').textContent = correct >= total*0.8 ? '🎉 Sehr gut!' : correct >= total*0.5 ? '👍 Guter Fortschritt!' : '💪 Weiter üben!';
+  document.getElementById(s+'-sum-text').textContent = `${correct} von ${total} Karten gewusst (${Math.round(correct/total*100)} %)`;
 }
 
-function startSet(n) {
-  SET = DATA[n];
-  allCards = SET.cards;
-  again = []; knows = 0; nopes = 0; cur = 0; mode = 'all';
-  deck = shuffle([...allCards]);
-
-  // Apply theme
-  const th = SET.th;
-  document.getElementById('qlabel').textContent = SET.label;
-  document.getElementById('qlabel').className   = 'qlabel ' + (th==='t' ? 'teal' : 'amber');
-  document.getElementById('qtitle').textContent = SET.title;
-  document.getElementById('pfill').className    = 'pfill ' + th;
-  document.getElementById('dRestart').className = 'dbtn ' + (th==='t' ? 'pt' : 'pa');
-
-  // Card theme
-  document.getElementById('front').className = 'face front ' + th;
-  document.getElementById('back').className  = 'face back '  + th;
-  document.getElementById('flbl').className  = 'clabel ' + th;
-  document.getElementById('blbl').className  = 'clabel ' + th;
-
-  updateModeBtns();
-  hide('home'); hide('done'); show('quiz');
-  loadCard();
+function restart(s) {
+  const d = DATA[s];
+  d.idx=0; d.ratings={}; d.flipped=false;
+  document.getElementById(s+'-summary').style.display='none';
+  document.getElementById(s+'-card').style.display='';
+  document.getElementById(s+'-rating').style.display='';
+  document.getElementById(s+'-dots').style.display='';
+  render(s);
 }
 
-// ── QUIZ LOGIC ─────────────────────────────────────────────────────────
-function updateModeBtns() {
-  const ac = SET.th === 't' ? 'at' : 'aa';
-  document.getElementById('mbAll').className   = 'mbtn' + (mode==='all'   ? ' '+ac : '');
-  document.getElementById('mbAgain').className = 'mbtn' + (mode==='again' ? ' '+ac : '');
-  document.getElementById('mbAll').textContent   = '🃏 Alle (' + allCards.length + ')';
-  document.getElementById('mbAgain').textContent = '🔁 Nochmal (' + again.length + ')';
-}
+render('b');
+render('a');
 
-function loadCard() {
-  const c = deck[cur];
-  document.getElementById('ftxt').textContent = c.q;
-  document.getElementById('btxt').textContent = c.a;
-  document.getElementById('card').classList.remove('flipped');
-  document.getElementById('abts').classList.remove('show');
-  isFlipped = false;
-
-  const done  = knows + nopes;
-  const total = allCards.length;
-  const pct   = total ? Math.round(done/total*100) : 0;
-
-  document.getElementById('stTotal').textContent = deck.length;
-  document.getElementById('stCur').textContent   = cur + 1;
-  document.getElementById('stKnow').textContent  = knows;
-  document.getElementById('stAgain').textContent = nopes;
-  document.getElementById('pfill').style.width   = pct + '%';
-  document.getElementById('pleft').textContent   = done + ' / ' + total + ' erledigt';
-  document.getElementById('ppct').textContent    = pct + '%';
-  updateModeBtns();
-}
-
-function flip() {
-  isFlipped = !isFlipped;
-  document.getElementById('card').classList.toggle('flipped', isFlipped);
-  document.getElementById('abts').classList.toggle('show', isFlipped);
-}
-
-function answer(knew) {
-  if (!isFlipped) { flip(); return; }
-  if (knew) { knows++; }
-  else {
-    nopes++;
-    if (!again.find(c => c.q === deck[cur].q)) again.push(deck[cur]);
-  }
-  cur++;
-  if (cur >= deck.length) showDone(); else loadCard();
-}
-
-function showDone() {
-  hide('quiz'); show('done');
-  document.getElementById('dKnow').textContent  = knows;
-  document.getElementById('dAgain').textContent = nopes;
-  const pct = allCards.length ? Math.round(knows/allCards.length*100) : 0;
-  document.getElementById('dmsg').textContent =
-    pct===100 ? '🏆 Perfekt! Du kennst alle Karten!' :
-    pct>=80   ? 'Stark! '+pct+'% gewusst. Fast geschafft!' :
-    pct>=50   ? pct+'% gewusst – du bist auf dem richtigen Weg!' :
-                pct+'% gewusst – wiederhole die Nochmal-Karten!';
-  document.getElementById('dAgainOnly').style.display = again.length ? '' : 'none';
-}
-
-function restart(onlyAgain) {
-  knows = 0; nopes = 0; cur = 0;
-  if (onlyAgain && again.length) {
-    deck = shuffle([...again]);
-    again = [];
-  } else {
-    deck = shuffle([...allCards]);
-    again = [];
-    mode = 'all';
-  }
-  updateModeBtns();
-  hide('done'); show('quiz');
-  loadCard();
-}
-
-// ── EVENT LISTENERS ────────────────────────────────────────────────────
-document.getElementById('btn1').addEventListener('click', function() { startSet(1); });
-document.getElementById('btn2').addEventListener('click', function() { startSet(2); });
-document.getElementById('backBtn').addEventListener('click', goHome);
-document.getElementById('flipBtn').addEventListener('click', flip);
-document.getElementById('noBtn').addEventListener('click',  function() { answer(false); });
-document.getElementById('yesBtn').addEventListener('click', function() { answer(true); });
-document.getElementById('card').addEventListener('click', flip);
-document.getElementById('mbAll').addEventListener('click',   function() { mode='all';   updateModeBtns(); });
-document.getElementById('mbAgain').addEventListener('click', function() { mode='again'; updateModeBtns(); });
-document.getElementById('dRestart').addEventListener('click',   function() { restart(false); });
-document.getElementById('dAgainOnly').addEventListener('click', function() { restart(true); });
-document.getElementById('dHome').addEventListener('click', goHome);
-
-// Keyboard
-document.addEventListener('keydown', function(e) {
-  if (!document.getElementById('quiz').classList.contains('hidden')) {
-    if (e.code === 'Space')       { e.preventDefault(); flip(); }
-    else if (e.code === 'ArrowLeft'  && isFlipped) answer(false);
-    else if (e.code === 'ArrowRight' && isFlipped) answer(true);
-    else if (e.code === 'Escape') goHome();
-  }
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight') next(activeSet);
+  if(e.key==='ArrowLeft') prev(activeSet);
+  if(e.key===' ') { e.preventDefault(); flip(activeSet); }
+  if(e.key==='1') rate(activeSet,'correct');
+  if(e.key==='2') rate(activeSet,'wrong');
 });
-
-// Touch swipe on card
-var tx0 = 0;
-document.getElementById('card').addEventListener('touchstart', function(e) {
-  tx0 = e.changedTouches[0].clientX;
-}, { passive: true });
-document.getElementById('card').addEventListener('touchend', function(e) {
-  var dx = e.changedTouches[0].clientX - tx0;
-  if (Math.abs(dx) > 55 && isFlipped) answer(dx > 0);
-}, { passive: true });
 </script>
 </body>
 </html>
