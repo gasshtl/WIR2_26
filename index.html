@@ -101,6 +101,19 @@ kbd{background:var(--surf2);border:1px solid var(--border);border-radius:4px;pad
 .dba{background:linear-gradient(135deg,#b45309,var(--amber));color:#1a0e00;box-shadow:0 4px 20px rgba(251,191,36,.25)}
 .dbs{background:var(--surf);color:var(--muted);border:1px solid var(--border)!important}
 @media(max-width:420px){.h1{font-size:24px}.ctx{font-size:15px}.bk2 .ctx{font-size:13px}.card{height:270px}.kbh{display:none}}
+
+.hstat{font-size:12px;margin-top:10px;display:flex;gap:4px;flex-wrap:wrap}
+.hs-g{color:var(--green)}.hs-r{color:var(--red)}.hs-d{color:var(--muted)}
+.rbtn{display:block;width:100%;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px;cursor:pointer;margin-top:8px;transition:all .2s}
+.rbtn:hover{border-color:var(--red);color:var(--red)}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+#modal.off{display:none!important}
+.mover{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:24px;width:100%;max-width:400px;display:flex;flex-direction:column;gap:14px}
+.mhead{display:flex;justify-content:space-between;align-items:center}
+.mtitle{font-family:'Syne',sans-serif;font-size:18px;font-weight:800}
+.mclose{background:var(--surf2);border:1px solid var(--border);border-radius:8px;color:var(--muted);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.mo-stats{font-size:13px;display:flex;gap:8px;flex-wrap:wrap}
+.mo-btn{margin:0}
 </style>
 </head>
 <body>
@@ -115,7 +128,7 @@ kbd{background:var(--surf2);border:1px solid var(--border);border-radius:4px;pad
     </div>
     <div class="sdsc">Grundlegende Themen: UGB, Firmenbuch, Vollmachten, Prokura, Firmennamen und Vermittler.</div>
     <div class="tags"><span class="tag">UGB</span><span class="tag">Firmenbuch</span><span class="tag">Prokura</span><span class="tag">Handlungsvollmacht</span><span class="tag">Firmenrecht</span><span class="tag">Makler</span></div>
-    <div class="arr">&#8594;</div>
+    <div id="hstat1" class="hstat"></div><div class="arr">&#8594;</div>
   </button>
   <button class="sbtn s2" id="b2" type="button">
     <div class="stop">
@@ -125,8 +138,21 @@ kbd{background:var(--surf2);border:1px solid var(--border);border-radius:4px;pad
     <div class="sdsc">Detailliertere Fragen inkl. Ubungsaufgaben (U 4.x), Grenzfalle und Spezialthemen.</div>
     <div class="tags"><span class="tag">Filialprokura</span><span class="tag">Negative Publizitat</span><span class="tag">Ubungsaufgaben</span><span class="tag">GmbH &amp; OG</span></div>
     <div class="wrn">&#9888;&#65039; Moglicherweise Fehler - Antworten kritisch prufen!</div>
-    <div class="arr">&#8594;</div>
+    <div id="hstat2" class="hstat"></div><div class="arr">&#8594;</div>
   </button>
+  <button class="rbtn" id="dreset" type="button">&#128465; Fortschritt zurücksetzen</button>
+</div>
+<div id="modal" class="off">
+  <div class="mover">
+    <div class="mhead">
+      <div class="mtitle" id="mo-title">Set starten</div>
+      <button class="mclose" id="mo-close" type="button">&#10005;</button>
+    </div>
+    <div id="mo-stats" class="mo-stats"></div>
+    <span id="mo-set" style="display:none"></span>
+    <button class="db dbt mo-btn" id="mo-rem" type="button">Weiter lernen</button>
+    <button class="db dbs mo-btn" id="mo-all" type="button">&#128260; Neu starten (Fortschritt löschen)</button>
+  </div>
 </div>
 <div id="quiz" class="scr off">
   <div class="qhd">
@@ -159,6 +185,7 @@ kbd{background:var(--surf2);border:1px solid var(--border);border-radius:4px;pad
   <div class="dh">Runde abgeschlossen!</div>
   <div class="sc"><div class="sci"><div class="scn g" id="dk">0</div><div class="scl">Kann ich</div></div><div class="sci"><div class="scn r" id="da">0</div><div class="scl">Nochmal</div></div></div>
   <div class="dm" id="dm"></div>
+  <div class="dm" id="dprog" style="font-size:13px;color:var(--teal);margin-top:-4px"></div>
   <button class="db" id="dr" type="button">&#128260; Alle wiederholen</button>
   <button class="db dbs" id="dg" type="button">&#127919; Nur Nochmal-Karten</button>
   <button class="db dbs" id="dh2" type="button">&#127968; Zuruck zur Auswahl</button>
@@ -233,13 +260,96 @@ var D={
     {q:`Welches Mindeststammkapital ist für die Gründung einer GmbH erforderlich?`, a:`Grundsätzlich 35.000 Euro (davon müssen bei der Gründung mindestens 17.500 Euro eingezahlt sein).`}
   ]}
 };
-var SET,all,deck,again,cur,kn,no,fl,mode;
+
+// ── STORAGE ──────────────────────────────────────────────
+var STORE_KEY = 'wir2_progress';
+
+function saveProgress() {
+  var data = {};
+  [1,2].forEach(function(n) {
+    var known = [], again = [];
+    D[n].cards.forEach(function(c, i) {
+      if (cardStates[n][i] === 'know') known.push(i);
+      else if (cardStates[n][i] === 'again') again.push(i);
+    });
+    data[n] = { known: known, again: again };
+  });
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch(e) { return null; }
+}
+
+function clearProgress() {
+  try { localStorage.removeItem(STORE_KEY); } catch(e) {}
+  [1,2].forEach(function(n) { cardStates[n] = {}; });
+  updateHomeStats();
+}
+
+// cardStates[setNum][cardIndex] = 'know' | 'again' | undefined
+var cardStates = {1:{}, 2:{}};
+
+function initStates() {
+  var saved = loadProgress();
+  if (saved) {
+    [1,2].forEach(function(n) {
+      if (saved[n]) {
+        saved[n].known.forEach(function(i) { cardStates[n][i] = 'know'; });
+        saved[n].again.forEach(function(i) { cardStates[n][i] = 'again'; });
+      }
+    });
+  }
+}
+
+function getStats(n) {
+  var know=0, again=0, total=D[n].cards.length;
+  D[n].cards.forEach(function(c,i) {
+    if (cardStates[n][i]==='know') know++;
+    else if (cardStates[n][i]==='again') again++;
+  });
+  return {know:know, again:again, total:total, unseen:total-know-again};
+}
+
+function updateHomeStats() {
+  [1,2].forEach(function(n) {
+    var s = getStats(n);
+    var el = document.getElementById('hstat'+n);
+    if (!el) return;
+    el.innerHTML =
+      '<span class="hs-g">&#10003; '+s.know+' gewusst</span> &nbsp; ' +
+      '<span class="hs-r">&#10007; '+s.again+' nochmal</span> &nbsp; ' +
+      '<span class="hs-d">&#9711; '+s.unseen+' neu</span>';
+  });
+}
+
+// ── STATE ──────────────────────────────────────────────
+var SET,all,deck,again,cur,kn,no,fl,mode,setNum;
+
 function sh(id){document.getElementById(id).classList.remove('off')}
 function hd(id){document.getElementById(id).classList.add('off')}
 function sf(a){var b=[...a];for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
-function home(){sh('home');hd('quiz');hd('done')}
-function go(n){
-  SET=D[n];all=SET.cards;again=[];kn=0;no=0;cur=0;mode='all';deck=sf([...all]);
+
+function home(){sh('home');hd('quiz');hd('done');updateHomeStats();}
+
+function go(n, onlyRemaining) {
+  setNum=n; SET=D[n]; all=SET.cards; again=[]; kn=0; no=0; cur=0; mode='all';
+
+  if (onlyRemaining) {
+    // Only cards NOT marked as 'know'
+    deck = sf(all.filter(function(c,i){ return cardStates[n][i] !== 'know'; }));
+    if (deck.length === 0) { alert('Alle Karten bereits als gewusst markiert!'); return; }
+  } else {
+    deck = sf([...all]);
+    // Reset all states for this set
+    cardStates[n] = {};
+    saveProgress();
+  }
+
   var t=SET.th;
   document.getElementById('qlb').textContent=SET.label;
   document.getElementById('qlb').className='qlb c'+t;
@@ -252,6 +362,7 @@ function go(n){
   document.getElementById('bl').className='clb '+t;
   upd();hd('home');hd('done');sh('quiz');load();
 }
+
 function upd(){
   var ac=SET.th==='t'?'at':'aa';
   document.getElementById('ma').className='mb'+(mode==='all'?' '+ac:'');
@@ -259,6 +370,11 @@ function upd(){
   document.getElementById('ma').textContent='Alle ('+all.length+')';
   document.getElementById('mg').textContent='Nochmal ('+again.length+')';
 }
+
+function getCardIndex(card) {
+  return all.findIndex(function(c){ return c.q === card.q; });
+}
+
 function load(){
   var c=deck[cur];
   document.getElementById('ft').textContent=c.q;
@@ -266,7 +382,7 @@ function load(){
   document.getElementById('card').classList.remove('fl');
   document.getElementById('ab').classList.remove('sh');
   fl=false;
-  var done=kn+no,tot=all.length,pct=tot?Math.round(done/tot*100):0;
+  var done=kn+no,tot=deck.length,pct=tot?Math.round(done/tot*100):0;
   document.getElementById('sto').textContent=deck.length;
   document.getElementById('scu').textContent=cur+1;
   document.getElementById('skn').textContent=kn;
@@ -276,12 +392,25 @@ function load(){
   document.getElementById('pp').textContent=pct+'%';
   upd();
 }
+
 function flip(){fl=!fl;document.getElementById('card').classList.toggle('fl',fl);document.getElementById('ab').classList.toggle('sh',fl)}
+
 function ans(k){
   if(!fl){flip();return}
-  if(k){kn++}else{no++;if(!again.find(function(c){return c.q===deck[cur].q}))again.push(deck[cur])}
-  cur++;if(cur>=deck.length)done2();else load();
+  var idx = getCardIndex(deck[cur]);
+  if(k){
+    kn++;
+    cardStates[setNum][idx] = 'know';
+  } else {
+    no++;
+    cardStates[setNum][idx] = 'again';
+    if(!again.find(function(c){return c.q===deck[cur].q})) again.push(deck[cur]);
+  }
+  saveProgress();
+  cur++;
+  if(cur>=deck.length) done2(); else load();
 }
+
 function done2(){
   hd('quiz');sh('done');
   document.getElementById('dk').textContent=kn;
@@ -289,16 +418,24 @@ function done2(){
   var pct=all.length?Math.round(kn/all.length*100):0;
   document.getElementById('dm').textContent=pct===100?'Perfekt! Du kennst alle Karten!':pct>=80?'Stark! '+pct+'% gewusst.':pct>=50?pct+'% gewusst - weiter so!':pct+'% gewusst - wiederhole die Nochmal-Karten!';
   document.getElementById('dg').style.display=again.length?'':'none';
+
+  // Show overall progress for this set
+  var s = getStats(setNum);
+  document.getElementById('dprog').textContent =
+    'Gesamtfortschritt Set ' + setNum + ': ' + s.know + ' von ' + s.total + ' Karten gewusst.';
   upd();
 }
+
 function restart(onlyAgain){
   kn=0;no=0;cur=0;
   if(onlyAgain&&again.length){deck=sf([...again]);again=[]}
   else{deck=sf([...all]);again=[];mode='all'}
   upd();hd('done');sh('quiz');load();
 }
-document.getElementById('b1').addEventListener('click',function(){go(1)});
-document.getElementById('b2').addEventListener('click',function(){go(2)});
+
+// ── EVENT LISTENERS ───────────────────────────────────────
+document.getElementById('b1').addEventListener('click',function(){ showSetOptions(1); });
+document.getElementById('b2').addEventListener('click',function(){ showSetOptions(2); });
 document.getElementById('bk').addEventListener('click',home);
 document.getElementById('bf').addEventListener('click',flip);
 document.getElementById('bn').addEventListener('click',function(){ans(false)});
@@ -309,6 +446,44 @@ document.getElementById('mg').addEventListener('click',function(){mode='again';u
 document.getElementById('dr').addEventListener('click',function(){restart(false)});
 document.getElementById('dg').addEventListener('click',function(){restart(true)});
 document.getElementById('dh2').addEventListener('click',home);
+document.getElementById('dreset').addEventListener('click',function(){
+  if(confirm('Wirklich gesamten Fortschritt zurücksetzen?')){ clearProgress(); }
+});
+
+// Set options modal
+function showSetOptions(n) {
+  var s = getStats(n);
+  var modal = document.getElementById('modal');
+  var remaining = s.total - s.know;
+  document.getElementById('mo-title').textContent = 'Set ' + n + ' starten';
+  document.getElementById('mo-stats').innerHTML =
+    '<span class="hs-g">&#10003; '+s.know+' gewusst</span> &nbsp; '+
+    '<span class="hs-r">&#10007; '+s.again+' nochmal</span> &nbsp; '+
+    '<span class="hs-d">&#9711; '+s.unseen+' neu</span>';
+
+  var btnRem = document.getElementById('mo-rem');
+  btnRem.textContent = 'Weiter lernen (' + remaining + ' Karten)';
+  btnRem.disabled = remaining === 0;
+  btnRem.style.opacity = remaining === 0 ? '0.4' : '1';
+
+  modal.classList.remove('off');
+  document.getElementById('mo-set').textContent = n;
+}
+
+document.getElementById('mo-all').addEventListener('click',function(){
+  var n = parseInt(document.getElementById('mo-set').textContent);
+  document.getElementById('modal').classList.add('off');
+  go(n, false);
+});
+document.getElementById('mo-rem').addEventListener('click',function(){
+  var n = parseInt(document.getElementById('mo-set').textContent);
+  document.getElementById('modal').classList.add('off');
+  go(n, true);
+});
+document.getElementById('mo-close').addEventListener('click',function(){
+  document.getElementById('modal').classList.add('off');
+});
+
 document.addEventListener('keydown',function(e){
   if(!document.getElementById('quiz').classList.contains('off')){
     if(e.code==='Space'){e.preventDefault();flip()}
@@ -320,6 +495,10 @@ document.addEventListener('keydown',function(e){
 var tx=0;
 document.getElementById('card').addEventListener('touchstart',function(e){tx=e.changedTouches[0].clientX},{passive:true});
 document.getElementById('card').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>55&&fl)ans(dx>0)},{passive:true});
+
+// Init
+initStates();
+updateHomeStats();
 </script>
 </body>
 </html>
